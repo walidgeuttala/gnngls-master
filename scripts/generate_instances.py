@@ -18,7 +18,7 @@ def prepare_instance(G):
     datasets.set_features(G)
     datasets.set_labels(G)
     return G
-
+walid
 
 def get_solved_instances(n_nodes, n_instances):
     for _ in range(n_instances):
