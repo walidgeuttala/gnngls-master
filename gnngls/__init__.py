@@ -1,4 +1,4 @@
-import concorde.tsp as concorde
+#import concorde.tsp as concorde
 import lkh
 import networkx as nx
 import numpy as np
@@ -44,12 +44,12 @@ def is_valid_tour(G, tour):
     return True
 
 
-def optimal_tour(G, scale=1e3):
-    coords = scale * np.vstack([G.nodes[n]['pos'] for n in sorted(G.nodes)])
-    solver = concorde.TSPSolver.from_data(coords[:, 0], coords[:, 1], norm='EUC_2D')
-    solution = solver.solve()
-    tour = solution.tour.tolist() + [0]
-    return tour
+# def optimal_tour(G, scale=1e3):
+#     coords = scale * np.vstack([G.nodes[n]['pos'] for n in sorted(G.nodes)])
+#     solver = concorde.TSPSolver.from_data(coords[:, 0], coords[:, 1], norm='EUC_2D')
+#     solution = solver.solve()
+#     tour = solution.tour.tolist() + [0]
+#     return tour
 
 
 def optimal_cost(G, weight='weight'):
@@ -84,9 +84,8 @@ def get_lower_triangle_adj_matrix_string(G):
 
 def fixed_edge_tour(G, e, lkh_path='./LKH', **kwargs):
     string = get_lower_triangle_adj_matrix_string(G)
-    print(string)
     problem = tsplib95.loaders.parse(string)
-    #problem.fixed_edges = [[n + 1 for n in e]]
+    problem.fixed_edges = [[n + 1 for n in e]]
 
     solution = lkh.solve(lkh_path, problem=problem)
     tour = [n - 1 for n in solution[0]] + [0]

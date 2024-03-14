@@ -19,15 +19,13 @@ def set_features(G):
             G.edges[e]['weight'],
         ], dtype=np.float32)
 
-
 def set_labels(G):
     optimal_cost = get_optimal_cost(G)
-
     for e in G.edges:
         regret = 0.
 
         if not G.edges[e]['in_solution']:
-            tour = fixed_edge_tour(G, e, scale=1e6, max_trials=100, runs=10)
+            tour = fixed_edge_tour(G, e, scale=1, max_trials=100, runs=10)
             cost = tour_cost(G, tour)
             regret = (cost - optimal_cost) / optimal_cost
 
