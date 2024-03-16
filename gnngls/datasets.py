@@ -12,24 +12,47 @@ from . import tour_cost, fixed_edge_tour, optimal_cost as get_optimal_cost
 
 
 def set_features(G):
+    cnt =  0
     for e in G.edges:
         i, j = e
-
+        cnt += 1
         G.edges[e]['features'] = np.array([
             G.edges[e]['weight'],
         ], dtype=np.float32)
+    print('counting', cnt)
 
 def set_labels(G):
     optimal_cost = get_optimal_cost(G)
+    print('cost that they fond', optimal_cost)
     for e in G.edges:
         regret = 0.
 
-        if not G.edges[e]['in_solution']:
-            tour = fixed_edge_tour(G, e, scale=1, max_trials=100, runs=10)
-            cost = tour_cost(G, tour)
-            regret = (cost - optimal_cost) / optimal_cost
-
+        if not G.edges[e]['in_solution']: 
+            i, j = e
+            if i != j:
+                tour = fixed_edge_tour(G, e)
+                cost = tour_cost(G, tour)
+                regret = (cost - optimal_cost) / optimal_cost
+            else:
+                regret = 200
+        print(regret, end=" ")
         G.edges[e]['regret'] = regret
+
+
+# def string_graph(G1):
+#     G2 = nx.Graph()
+#     num_nodes = G1.number_of_edges()
+#     nodes = range(0, num_nodes*(num_nodes+1)/2)
+#     G2.add_nodes_from(nodes)
+#     for edge in G1.edges():
+#         s, t = edge
+#         for neighbor in range(0, num_nodes):
+#             if neighbor == t:
+#                 pass
+#             elif neighbor == s:
+#                 pass
+#             else:
+#                 pass
 
 
 class TSPDataset(torch.utils.data.Dataset):
@@ -53,6 +76,7 @@ class TSPDataset(torch.utils.data.Dataset):
         # only works for homogenous datasets
         G = nx.read_gpickle(self.root_dir / self.instances[0])
         lG = nx.line_graph(G)
+        lG = lG.to_undirected()
         for n in lG.nodes:
             lG.nodes[n]['e'] = n
         self.G = dgl.from_networkx(lG, node_attrs=['e'])

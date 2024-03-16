@@ -10,7 +10,7 @@ def tour_to_edge_attribute(G, tour):
     in_tour = {}
     tour_edges = list(zip(tour[:-1], tour[1:]))
     for e in G.edges:
-        in_tour[e] = e in tour_edges or tuple(reversed(e)) in tour_edges
+        in_tour[e] = e in tour_edges
     return in_tour
 
 
@@ -60,30 +60,31 @@ def optimal_cost(G, weight='weight'):
     return c
 
 
-def get_lower_triangle_adj_matrix_string(G):
+def get_adj_matrix_string(G):
     # Get the lower triangular adjacency matrix with diagonal
     adj_matrix = nx.to_numpy_array(G).astype(int)
-    lower_triangle = np.tril(adj_matrix)
-    # Convert the lower triangular matrix to a string
-    adj_matrix_string = ""
-    for idx, row in enumerate(lower_triangle):
-        row_string = " ".join(map(str, row[:idx+1]))
-        adj_matrix_string += row_string + "\n"
-    # Add EOF
-    adj_matrix_string += "EOF"
-    ans = '''NAME: TSP
+    n = adj_matrix.shape[0]
+    ans = '''NAME: ATSP
     COMMENT: 64-city problem
-    TYPE: TSP
+    TYPE: ATSP
     DIMENSION: 64
     EDGE_WEIGHT_TYPE: EXPLICIT
-    EDGE_WEIGHT_FORMAT: LOWER_DIAG_ROW
-    EDGE_WEIGHT_SECTION:
+    EDGE_WEIGHT_FORMAT: FULL_MATRIX
+    EDGE_WEIGHT_SECTION: 
     '''
-    return (ans+adj_matrix_string).strip()
+    for i in range(n):
+        # Iterate over columns up to the diagonal
+        for j in range(n):
+            ans += str(adj_matrix[i][j]) + " "
+        ans += "\n"
+    # Add EOF
+    # adj_matrix_string += "EOF"
+    
+    return ans.strip()
 
 
-def fixed_edge_tour(G, e, lkh_path='./LKH', **kwargs):
-    string = get_lower_triangle_adj_matrix_string(G)
+def fixed_edge_tour(G, e, lkh_path='../LKH-3.0.9/LKH'):
+    string = get_adj_matrix_string(G)
     problem = tsplib95.loaders.parse(string)
     problem.fixed_edges = [[n + 1 for n in e]]
 
