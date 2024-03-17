@@ -48,15 +48,16 @@ def get_solved_instances2(n_nodes, n_instances, all_instances):
         line = linecache.getline(all_instances, i+2).strip()
         G = nx.DiGraph()
         adj, opt_solution, cost = line.split(',')
-        print('cost that I fonded', cost)
         adj = adj.split(' ')
         G.add_nodes_from(range(n_nodes))
         opt_solution = [int(x) for x in opt_solution.split()]
         
+        # Add the edges for the DiGraph and be sure that does not have self loops in the node
         for j in range(n_nodes):
             for k in range(n_nodes):
                 w = float(adj[j*n_nodes+k])
-                G.add_edge(j, k, weight=w)
+                if j != k:
+                    G.add_edge(j, k, weight=w)
             
         in_solution = gnngls.tour_to_edge_attribute(G, opt_solution)
         nx.set_edge_attributes(G, in_solution, 'in_solution')
@@ -79,7 +80,7 @@ if __name__ == '__main__':
         args.output_dir.mkdir()
 
     pool = mp.Pool(processes=None)
-    instance_gen = get_solved_instances2(args.n_nodes, args.n_samples, args.input_file)
+    instance_gen = get_solved_instances3_test(args.n_nodes, args.n_samples, args.input_file)
     for G in pool.imap_unordered(prepare_instance, instance_gen):
         nx.write_gpickle(G, args.output_dir / f'{uuid.uuid4().hex}.pkl')
     pool.close()

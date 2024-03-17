@@ -51,7 +51,7 @@ def compute_tour_cost(tour, adjacency_matrix):
     return cost
 
 all_instances_lower_triangle_tour_cost = 'adj,tour,cost\n'
-number_instances = 3
+number_instances = 10000
 output_dir = f"../tsplib95_{number_instances}_instances_64_node"
 os.mkdir(output_dir)
 input_dir = "generated_tsp_tasks_64_v2"

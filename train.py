@@ -94,7 +94,6 @@ if __name__ == '__main__':
     print('device =', device)
 
     _, feat_dim = train_set[0].ndata['features'].shape
-
     model = models.EdgePropertyPredictionModel(
         feat_dim,
         args.embed_dim,

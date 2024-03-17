@@ -67,7 +67,7 @@ def get_adj_matrix_string(G):
     ans = '''NAME: ATSP
     COMMENT: 64-city problem
     TYPE: ATSP
-    DIMENSION: 64
+    DIMENSION: 3
     EDGE_WEIGHT_TYPE: EXPLICIT
     EDGE_WEIGHT_FORMAT: FULL_MATRIX
     EDGE_WEIGHT_SECTION: 

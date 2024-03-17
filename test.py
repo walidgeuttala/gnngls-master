@@ -23,7 +23,7 @@ if __name__ == '__main__':
     parser.add_argument('model_path', type=pathlib.Path)
     parser.add_argument('run_dir', type=pathlib.Path)
     parser.add_argument('guides', type=str, nargs='+')
-    parser.add_argument('--time_limit', type=float, default=10.)
+    parser.add_argument('--time_limit', type=float, default=1.)
     parser.add_argument('--perturbation_moves', type=int, default=20)
     parser.add_argument('--use_gpu', action='store_true')
     args = parser.parse_args()
