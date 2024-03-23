@@ -30,6 +30,11 @@ def set_labels(G):
             
         G.edges[e]['regret'] = regret
 
+def set_labels2(G):
+    optimal_cost = get_optimal_cost(G)
+    for e in G.edges:
+        regret = 0.
+        G.edges[e]['regret'] = regret
 
 # def string_graph(G1):
 #     G2 = nx.Graph()

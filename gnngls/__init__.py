@@ -52,6 +52,32 @@ def is_valid_tour(G, tour):
 #     return tour
 
 
+def tranfer_tour(self, tour, x):
+    result_list = []
+    for num in tour:
+        result_list.append(num)
+        result_list.append(num + x)
+    return result_list[:-1]
+
+def as_symmetric(matrix, INF = 1e6):
+    shape = len(matrix)
+    mat = np.identity(shape) * - INF + matrix
+
+    new_shape = shape * 2
+    new_matrix = np.ones((new_shape, new_shape)) * INF
+    np.fill_diagonal(new_matrix, 0)
+
+    # insert new matrices
+    new_matrix[shape:new_shape, :shape] = mat
+    new_matrix[:shape, shape:new_shape] = mat.T
+    # new cost matrix after transformation
+
+    return new_matrix
+
+
+def adjacency_matrix_to_networkx(adj_matrix):
+    return nx.Graph(np.triu(adj_matrix))
+
 def optimal_cost(G, weight='weight'):
     c = 0
     for e in G.edges:
@@ -64,10 +90,10 @@ def get_adj_matrix_string(G):
     # Get the lower triangular adjacency matrix with diagonal
     adj_matrix = nx.to_numpy_array(G).astype(int)
     n = adj_matrix.shape[0]
-    ans = '''NAME: ATSP
+    ans = f'''NAME: ATSP
     COMMENT: 64-city problem
     TYPE: ATSP
-    DIMENSION: 3
+    DIMENSION: {n}
     EDGE_WEIGHT_TYPE: EXPLICIT
     EDGE_WEIGHT_FORMAT: FULL_MATRIX
     EDGE_WEIGHT_SECTION: 

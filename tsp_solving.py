@@ -3,6 +3,7 @@ import numpy as np
 import tsplib95
 import lkh
 import os
+import gnngls
 
 def convert_adj_string(adjacency_matrix):
   ans = ''
@@ -18,10 +19,10 @@ def create_tsplib95_string(adjacency_matrix):
     n = adjacency_matrix.shape[0]
 
     # Initialize an empty string to store the result
-    result = '''NAME: ATSP
-    COMMENT: 64-city problem
-    TYPE: ATSP
-    DIMENSION: 64
+    result = f'''NAME: TSP
+    COMMENT: {n}-city problem
+    TYPE: TSP
+    DIMENSION: {n}
     EDGE_WEIGHT_TYPE: EXPLICIT
     EDGE_WEIGHT_FORMAT: FULL_MATRIX
     EDGE_WEIGHT_SECTION: 
@@ -45,13 +46,11 @@ def compute_tour_cost(tour, adjacency_matrix):
     cost = 0
     n = len(tour)
     for i in range(n - 1):
-        start_node = tour[i]
-        end_node = tour[i + 1]
-        cost += adjacency_matrix[start_node - 1, end_node - 1]  # Subtract 1 to convert 1-indexed to 0-indexed
+        cost += adjacency_matrix[tour[i], tour[i + 1]]  # Subtract 1 to convert 1-indexed to 0-indexed
     return cost
 
 all_instances_lower_triangle_tour_cost = 'adj,tour,cost\n'
-number_instances = 10000
+number_instances = 10
 output_dir = f"../tsplib95_{number_instances}_instances_64_node"
 os.mkdir(output_dir)
 input_dir = "generated_tsp_tasks_64_v2"
@@ -70,19 +69,19 @@ for i in range(number_instances):
   adjacency_matrix = [[int(x) for x in row.split()] for row in rows]
 
   # Convert the list of lists into a NumPy array
-  adjacency_matrix_np = np.array(adjacency_matrix)
-
+  adjacency_matrix = np.array(adjacency_matrix)
+  adjacency_matrix = gnngls.as_symmetric(adjacency_matrix)
   # Convert the ADJ into tsplib file problem
-  string_problem = create_tsplib95_string(adjacency_matrix_np)
+  string_problem = create_tsplib95_string(adjacency_matrix)
   tour = fixed_edge_tour(string_problem)
-  cost = compute_tour_cost(tour, adjacency_matrix_np)
+  cost = compute_tour_cost(tour, adjacency_matrix)
 #   # Saving tsplib file
 #   # Open the file in write mode
 #   with open(f'{output_dir}/instance{i}.txt', 'w') as file:
 #       # Write the string into the file
 #       file.write(string_problem)
 
-  all_instances_lower_triangle_tour_cost += convert_adj_string(adjacency_matrix_np)+','+" ".join(map(str, tour))+','+str(cost)+'\n'
+  all_instances_lower_triangle_tour_cost += convert_adj_string(adjacency_matrix)+','+" ".join(map(str, tour))+','+str(cost)+'\n'
  
 with open(f'{output_dir}/all_instances_adj_tour_cost.txt', 'w') as file:
       # Write the string into the file

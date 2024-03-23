@@ -12,22 +12,22 @@ import networkx as nx
 import numpy as np
 import pandas as pd
 import torch
-import tqdm.auto as tqdm
+#import tqdm.auto as tqdm
 
 import gnngls
 from gnngls import algorithms, models, datasets
-
+from atps_to_tsp import TSPExact
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Test model')
     parser.add_argument('data_path', type=pathlib.Path)
     parser.add_argument('model_path', type=pathlib.Path)
     parser.add_argument('run_dir', type=pathlib.Path)
     parser.add_argument('guides', type=str, nargs='+')
-    parser.add_argument('--time_limit', type=float, default=1.)
+    parser.add_argument('--time_limit', type=float, default=0.)
     parser.add_argument('--perturbation_moves', type=int, default=20)
     parser.add_argument('--use_gpu', action='store_true')
     args = parser.parse_args()
-
+    print('start',flush=True)
     params = json.load(open(args.model_path.parent / 'params.json'))
     if 'efeat_drop_idx' in params:
         test_set = datasets.TSPDataset(args.data_path, feat_drop_idx=params['efeat_drop_idx'])
@@ -53,10 +53,11 @@ if __name__ == '__main__':
         model.load_state_dict(checkpoint['model_state_dict'])
         model.eval()
 
-    pbar = tqdm.tqdm(test_set.instances)
+    #pbar = tqdm.tqdm(test_set.instances)
     gaps = []
     search_progress = []
-    for instance in pbar:
+    cnt = 0
+    for instance in test_set.instances:
         G = nx.read_gpickle(test_set.root_dir / instance)
 
         opt_cost = gnngls.optimal_cost(G, weight='weight')
@@ -75,7 +76,6 @@ if __name__ == '__main__':
             y = H.ndata['regret']
             with torch.no_grad():
                 y_pred = model(H, x)
-
             regret_pred = test_set.scalers['regret'].inverse_transform(y_pred.cpu().numpy())
 
             es = H.ndata['e'].cpu().numpy()
@@ -83,32 +83,40 @@ if __name__ == '__main__':
                 G.edges[e]['regret_pred'] = np.maximum(regret_pred_i.item(), 0)
 
             init_tour = algorithms.nearest_neighbor(G, 0, weight='regret_pred')
-
+            
         else:
             init_tour = algorithms.nearest_neighbor(G, 0, weight='weight')
 
+        num_nodes = G.number_of_nodes()
+        atsp_edge_weight, _ = nx.attr_matrix(G, 'weight')
+        tsp = TSPExact(atsp_edge_weight)
+        tsp_edge_weight = tsp.cost_matrix
+        tsp_tour = tsp.tranfer_tour(init_tour, num_nodes)
+        tsp_G = nx.Graph(np.triu(tsp_edge_weight))
+        value = 1e6 * num_nodes 
         init_cost = gnngls.tour_cost(G, init_tour)
-        best_tour, best_cost, search_progress_i = algorithms.guided_local_search(G, init_tour, init_cost,
+        
+        best_tour, best_cost, search_progress_i = algorithms.guided_local_search(tsp_G, tsp_tour, init_cost,
                                                                                  t + args.time_limit, weight='weight',
                                                                                  guides=args.guides,
                                                                                  perturbation_moves=args.perturbation_moves,
-                                                                                 first_improvement=False)
-
+                                                                                 first_improvement=False, value=value)
         for row in search_progress_i:
             row.update({
                 'instance': instance,
                 'opt_cost': opt_cost
             })
             search_progress.append(row)
-
+        best_cost += value
         gap = (best_cost / opt_cost - 1) * 100
         gaps.append(gap)
-        pbar.set_postfix({
-            'Avg Gap': '{:.4f}'.format(np.mean(gaps)),
-        })
-        pbar.update(1)
+        print(f'best_cost {best_cost} opt_cost {opt_cost}')
+        print('Avg Gap: {:.4f}'.format(np.mean(gaps)))
 
-    pbar.close()
+        cnt += 1
+        if cnt == 2:
+            break
+        
 
     search_progress_df = pd.DataFrame.from_records(search_progress)
     search_progress_df['best_cost'] = search_progress_df.groupby('instance')['cost'].cummin()

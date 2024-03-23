@@ -17,7 +17,7 @@ import linecache
 
 def prepare_instance(G):
     datasets.set_features(G)
-    datasets.set_labels(G)
+    datasets.set_labels2(G)
     return G
 
 

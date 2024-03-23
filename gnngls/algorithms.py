@@ -107,6 +107,12 @@ def insertion(G, depot, mode='farthest', weight='weight'):
 
     return tour
 
+def compute_tour_cost(tour, adjacency_matrix):
+    cost = 0
+    n = len(tour)
+    for i in range(n - 1):
+        cost += adjacency_matrix[tour[i], tour[i + 1]]  # Subtract 1 to convert 1-indexed to 0-indexed
+    return cost
 
 def local_search(init_tour, init_cost, D, first_improvement=False):
     cur_tour, cur_cost = init_tour, init_cost
@@ -123,7 +129,6 @@ def local_search(init_tour, init_cost, D, first_improvement=False):
                 improved = True
                 cur_cost += delta
                 cur_tour = new_tour
-
                 search_progress.append({
                     'time': time.time(),
                     'cost': cur_cost
@@ -133,15 +138,14 @@ def local_search(init_tour, init_cost, D, first_improvement=False):
 
 
 def guided_local_search(G, init_tour, init_cost, t_lim, weight='weight', guides=['weight'], perturbation_moves=30,
-                        first_improvement=False):
+                        first_improvement=False, value=0):
     k = 0.1 * init_cost / len(G.nodes)
     nx.set_edge_attributes(G, 0, 'penalty')
 
     edge_weight, _ = nx.attr_matrix(G, weight)
-
+    
     cur_tour, cur_cost, search_progress = local_search(init_tour, init_cost, edge_weight, first_improvement)
     best_tour, best_cost = cur_tour, cur_cost
-
     iter_i = 0
     while time.time() < t_lim:
         guide = guides[iter_i % len(guides)]  # option change guide ever iteration (as in KGLS)
@@ -179,7 +183,7 @@ def guided_local_search(G, init_tour, init_cost, t_lim, weight='weight', guides=
 
                             search_progress.append({
                                 'time': time.time(),
-                                'cost': cur_cost
+                                'cost': cur_cost + value
                             })
 
                         moves += moved

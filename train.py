@@ -78,7 +78,7 @@ if __name__ == '__main__':
     parser.add_argument('--lr_decay', type=float, default=0.99, help='Learning rate decay')
     parser.add_argument('--min_delta', type=float, default=1e-4, help='Early stopping min delta')
     parser.add_argument('--patience', type=int, default=1, help='Early stopping patience')
-    parser.add_argument('--batch_size', type=int, default=1, help='Batch size')
+    parser.add_argument('--batch_size', type=int, default=36, help='Batch size')
     parser.add_argument('--n_epochs', type=int, default=1, help='Number of epochs')
     parser.add_argument('--checkpoint_freq', type=int, default=1, help='Checkpoint frequency')
     parser.add_argument('--target', type=str, default='regret', choices=['regret', 'in_solution'])

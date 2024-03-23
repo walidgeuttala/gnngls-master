@@ -1,0 +1,131 @@
+/home/p_gnngw/miniconda3/envs/myenv/lib/python3.8/site-packages/sklearn/base.py:347: InconsistentVersionWarning: Trying to unpickle estimator MinMaxScaler from version 0.24.2 when using version 1.3.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+device = cpu
+  0%|          | 0/32 [00:00<?, ?it/s]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+  0%|          | 0/32 [00:01<?, ?it/s, Avg Gap=4.7146]  3%|▎         | 1/32 [00:01<00:59,  1.91s/it, Avg Gap=4.7146]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+  6%|▋         | 2/32 [00:03<00:57,  1.91s/it, Avg Gap=3.9861]  9%|▉         | 3/32 [00:03<00:26,  1.08it/s, Avg Gap=3.9861]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+ 12%|█▎        | 4/32 [00:04<00:26,  1.08it/s, Avg Gap=2.6574] 16%|█▌        | 5/32 [00:04<00:21,  1.27it/s, Avg Gap=2.6574]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+ 16%|█▌        | 5/32 [00:05<00:21,  1.27it/s, Avg Gap=2.7104] 19%|█▉        | 6/32 [00:05<00:22,  1.16it/s, Avg Gap=2.7104]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+ 22%|██▏       | 7/32 [00:06<00:21,  1.16it/s, Avg Gap=2.4515] 25%|██▌       | 8/32 [00:06<00:18,  1.33it/s, Avg Gap=2.4515]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+ 25%|██▌       | 8/32 [00:07<00:18,  1.33it/s, Avg Gap=2.6676] 28%|██▊       | 9/32 [00:07<00:19,  1.15it/s, Avg Gap=2.6676]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+ 28%|██▊       | 9/32 [00:09<00:19,  1.15it/s, Avg Gap=2.5864] 31%|███▏      | 10/32 [00:09<00:21,  1.00it/s, Avg Gap=2.5864]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+ 34%|███▍      | 11/32 [00:10<00:20,  1.00it/s, Avg Gap=2.2631] 38%|███▊      | 12/32 [00:10<00:16,  1.20it/s, Avg Gap=2.2631]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+ 38%|███▊      | 12/32 [00:11<00:16,  1.20it/s, Avg Gap=2.0339] 41%|████      | 13/32 [00:11<00:16,  1.12it/s, Avg Gap=2.0339]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+ 41%|████      | 13/32 [00:12<00:16,  1.12it/s, Avg Gap=2.0522] 44%|████▍     | 14/32 [00:12<00:17,  1.03it/s, Avg Gap=2.0522]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+ 44%|████▍     | 14/32 [00:13<00:17,  1.03it/s, Avg Gap=1.9526] 47%|████▋     | 15/32 [00:13<00:17,  1.02s/it, Avg Gap=1.9526]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+ 50%|█████     | 16/32 [00:15<00:16,  1.02s/it, Avg Gap=2.0925] 53%|█████▎    | 17/32 [00:15<00:12,  1.18it/s, Avg Gap=2.0925]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+ 53%|█████▎    | 17/32 [00:16<00:12,  1.18it/s, Avg Gap=2.0593] 56%|█████▋    | 18/32 [00:16<00:13,  1.05it/s, Avg Gap=2.0593]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+ 56%|█████▋    | 18/32 [00:17<00:13,  1.05it/s, Avg Gap=1.9652] 59%|█████▉    | 19/32 [00:17<00:12,  1.03it/s, Avg Gap=1.9652]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+ 59%|█████▉    | 19/32 [00:18<00:12,  1.03it/s, Avg Gap=1.9571] 62%|██████▎   | 20/32 [00:18<00:12,  1.02s/it, Avg Gap=1.9571]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+ 62%|██████▎   | 20/32 [00:19<00:12,  1.02s/it, Avg Gap=2.0637] 66%|██████▌   | 21/32 [00:19<00:11,  1.08s/it, Avg Gap=2.0637]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+ 69%|██████▉   | 22/32 [00:21<00:10,  1.08s/it, Avg Gap=1.9748] 72%|███████▏  | 23/32 [00:21<00:07,  1.17it/s, Avg Gap=1.9748]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+ 72%|███████▏  | 23/32 [00:22<00:07,  1.17it/s, Avg Gap=1.9405] 75%|███████▌  | 24/32 [00:22<00:07,  1.11it/s, Avg Gap=1.9405]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+ 75%|███████▌  | 24/32 [00:23<00:07,  1.11it/s, Avg Gap=2.1509] 78%|███████▊  | 25/32 [00:23<00:06,  1.03it/s, Avg Gap=2.1509]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+ 78%|███████▊  | 25/32 [00:24<00:06,  1.03it/s, Avg Gap=2.1594] 81%|████████▏ | 26/32 [00:24<00:05,  1.00it/s, Avg Gap=2.1594]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+ 81%|████████▏ | 26/32 [00:25<00:05,  1.00it/s, Avg Gap=2.1624] 84%|████████▍ | 27/32 [00:25<00:05,  1.02s/it, Avg Gap=2.1624]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+ 84%|████████▍ | 27/32 [00:26<00:05,  1.02s/it, Avg Gap=2.0641] 88%|████████▊ | 28/32 [00:26<00:04,  1.07s/it, Avg Gap=2.0641]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+ 91%|█████████ | 29/32 [00:27<00:03,  1.07s/it, Avg Gap=2.1316] 94%|█████████▍| 30/32 [00:27<00:01,  1.21it/s, Avg Gap=2.1316]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+ 94%|█████████▍| 30/32 [00:28<00:01,  1.21it/s, Avg Gap=2.1859] 97%|█████████▋| 31/32 [00:28<00:00,  1.06it/s, Avg Gap=2.1859]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+ 97%|█████████▋| 31/32 [00:30<00:00,  1.06it/s, Avg Gap=2.2145]100%|██████████| 32/32 [00:30<00:00,  1.01it/s, Avg Gap=2.2145]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+100%|██████████| 32/32 [00:31<00:00,  1.01it/s, Avg Gap=2.2804]33it [00:31,  1.03s/it, Avg Gap=2.2804]                        /project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+33it [00:32,  1.03s/it, Avg Gap=2.2721]34it [00:32,  1.07s/it, Avg Gap=2.2721]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+34it [00:33,  1.07s/it, Avg Gap=2.2091]35it [00:33,  1.11s/it, Avg Gap=2.2091]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+35it [00:34,  1.11s/it, Avg Gap=2.3402]36it [00:34,  1.11s/it, Avg Gap=2.3402]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+37it [00:35,  1.11s/it, Avg Gap=2.3135]38it [00:35,  1.15it/s, Avg Gap=2.3135]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+38it [00:37,  1.15it/s, Avg Gap=2.2527]39it [00:37,  1.06it/s, Avg Gap=2.2527]/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:140: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_weight, _ = nx.attr_matrix(G, weight)
+/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py:163: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  edge_penalties, _ = nx.attr_matrix(G, 'penalty')
+39it [00:38,  1.06it/s, Avg Gap=2.2921]40it [00:38,  1.01s/it, Avg Gap=2.2921]100%|██████████| 32/32 [00:38<00:00,  1.20s/it, Avg Gap=2.2921]
