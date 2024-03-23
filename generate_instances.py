@@ -20,7 +20,6 @@ def prepare_instance(G):
     datasets.set_labels(G)
     return G
 
-
 def get_solved_instances(n_nodes, n_instances):
     for _ in range(n_instances):
         G = nx.Graph()
