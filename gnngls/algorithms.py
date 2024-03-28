@@ -187,7 +187,7 @@ def guided_local_search(G, init_tour, init_cost, t_lim, weight='weight', guides=
                             })
                         if moved == False:
                             cnt += 1
-                            if cnt == 100:
+                            if cnt == 10:
                                 moved = True
                                 cnt = 0
                                 search_progress.append({

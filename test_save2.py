@@ -113,6 +113,10 @@ if __name__ == '__main__':
         edge_weight, _ = nx.attr_matrix(G, 'weight')
         regret, _ = nx.attr_matrix(G, 'regret')
         regret_pred, _ = nx.attr_matrix(G, 'regret_pred')
+        if cnt == 0:
+            print(edge_weight,flush=True)
+            print(regret,flush=True)
+            print(regret_pred,flush=True)
         with open(args.output_path / f"instance{cnt}.txt", "w") as f:
             # Save array1
             f.write("edge_weight:\n")
