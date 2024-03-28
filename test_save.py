@@ -22,8 +22,8 @@ if __name__ == '__main__':
     parser.add_argument('data_path', type=pathlib.Path)
     parser.add_argument('model_path', type=pathlib.Path)
     parser.add_argument('run_dir', type=pathlib.Path)
-    parser.add_argument('output_path', type=pathlib.Path)
     parser.add_argument('guides', type=str, nargs='+')
+    parser.add_argument('output_path', type=pathlib.Path)
     parser.add_argument('--time_limit', type=float, default=10.)
     parser.add_argument('--perturbation_moves', type=int, default=20)
     parser.add_argument('--use_gpu', action='store_true')
@@ -55,7 +55,6 @@ if __name__ == '__main__':
 
         model.load_state_dict(checkpoint['model_state_dict'])
         model.eval()
-    print('1',flush=True)
     #pbar = tqdm.tqdm(test_set.instances)
     gaps = []
     search_progress = []
@@ -94,7 +93,6 @@ if __name__ == '__main__':
         else:
             init_tour = algorithms.nearest_neighbor(G, 0, weight='weight')
 
-        print(regret, flush=True)
         
         value = 1e6 * num_nodes / 2
         init_cost = gnngls.tour_cost(G, init_tour)

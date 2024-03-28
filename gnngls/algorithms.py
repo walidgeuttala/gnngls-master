@@ -154,6 +154,7 @@ def guided_local_search(G, init_tour, init_cost, t_lim, weight='weight', guides=
 
         # perturbation
         moves = 0
+        cnt = 0
         while moves < perturbation_moves:
             # penalize edge
             max_util = 0
@@ -163,7 +164,6 @@ def guided_local_search(G, init_tour, init_cost, t_lim, weight='weight', guides=
                 if util > max_util or max_util_e is None:
                     max_util = util
                     max_util_e = e
-
             G.edges[max_util_e]['penalty'] += 1.
             edge_penalties, _ = nx.attr_matrix(G, 'penalty')
             edge_weight_guided = edge_weight + k * edge_penalties
@@ -185,9 +185,18 @@ def guided_local_search(G, init_tour, init_cost, t_lim, weight='weight', guides=
                                 'time': time.time(),
                                 'cost': cur_cost + value
                             })
-
+                        if moved == False:
+                            cnt += 1
+                            if cnt == 100:
+                                moved = True
+                                cnt = 0
+                                search_progress.append({
+                                'time': time.time(),
+                                'cost': cur_cost + value
+                                })
                         moves += moved
                         cnt_ans += 1
+            
         # optimisation
         cur_tour, cur_cost, new_search_progress, cnt = local_search(cur_tour, cur_cost, edge_weight, first_improvement)
         search_progress += new_search_progress
