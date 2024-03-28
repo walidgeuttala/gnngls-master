@@ -64,55 +64,24 @@ def get_solved_instances2(n_nodes, n_instances, all_instances):
 
         yield G
 
-# if __name__ == '__main__':
-#     parser = argparse.ArgumentParser(description='Generate a dataset.')
-#     parser.add_argument('n_samples', type=int)
-#     parser.add_argument('n_nodes', type=int)
-#     parser.add_argument('input_file', type=str)
-#     parser.add_argument('output_dir', type=pathlib.Path)
-#     args = parser.parse_args()
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Generate a dataset.')
+    parser.add_argument('n_samples', type=int)
+    parser.add_argument('n_nodes', type=int)
+    parser.add_argument('input_file', type=str)
+    parser.add_argument('output_dir', type=pathlib.Path)
+    args = parser.parse_args()
 
-#     if args.output_dir.exists():
-#         raise Exception(f'Output directory {args.output_dir} exists.')
-#     else:
-#         args.output_dir.mkdir()
+    if args.output_dir.exists():
+        raise Exception(f'Output directory {args.output_dir} exists.')
+    else:
+        args.output_dir.mkdir()
 
-#     pool = mp.Pool(processes=None)
-#     instance_gen = get_solved_instances2(args.n_nodes, args.n_samples, args.input_file)
-#     for G in pool.imap_unordered(prepare_instance, instance_gen):
-#         nx.write_gpickle(G, args.output_dir / f'{uuid.uuid4().hex}.pkl')
-#     pool.close()
-#     pool.join()
-
-
-def append_text_to_file(filename, text):
-    with open(filename, 'a') as file: file.write(text + '\n')
+    pool = mp.Pool(processes=None)
+    instance_gen = get_solved_instances2(args.n_nodes, args.n_samples, args.input_file)
+    for G in pool.imap_unordered(prepare_instance, instance_gen):
+        nx.write_gpickle(G, args.output_dir / f'{uuid.uuid4().hex}.pkl')
+    pool.close()
+    pool.join()
 
 
-def atsp_to_tsp():
-    value = 64e6
-    for i in range(10000):
-        line = linecache.getline('../tsplib95_10000_instances_64_node/all_instances_adj_tour_cost.txt', i+2).strip()
-        adj, opt_solution, cost = line.split(',')
-        cost = float(cost)
-        cost -= value
-        adj = adj.split(' ')[:-1]
-        opt_solution = [int(x) for x in opt_solution.split()]
-        adj = np.array(adj, dtype=np.int32).reshape(64, 64)
-        adj = gnngls.as_symmetric(adj)
-        opt_solution = gnngls.tranfer_tour(opt_solution, 64)
-        instance_adj_tour_cost = gnngls.convert_adj_string(adj)+','+" ".join(map(str, opt_solution))+','+str(cost)
-        append_text_to_file('../tsplib95_10000_instances_64_node/tsp_all_instances_adj_tour_cost.txt', instance_adj_tour_cost)
-
-def adjacency_matrix_to_networkx(adj_matrix):
-    return nx.Graph(np.triu(adj_matrix))
-
-def optimal_cost(G, weight='weight'):
-    c = 0
-    for e in G.edges:
-        if G.edges[e]['in_solution']:
-            c += G.edges[e][weight]
-    return c
-
-
-atsp_to_tsp()
