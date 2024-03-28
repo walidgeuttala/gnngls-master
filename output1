@@ -1,2 +1,0 @@
-device = cpu
-  0%|          | 0/32 [00:00<?, ?it/s]slurmstepd: error: *** JOB 4010517 ON x1000c0s2b0n1 CANCELLED AT 2024-03-17T23:56:25 ***

@@ -44,7 +44,6 @@ def two_opt_a2a(tour, D, first_improvement=False):
             best_move = i, j
             if first_improvement:
                 break
-
     if best_move is not None:
         return best_delta, two_opt(tour, *best_move)
     return 0, tour

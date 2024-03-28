@@ -22,11 +22,15 @@ if __name__ == '__main__':
     parser.add_argument('data_path', type=pathlib.Path)
     parser.add_argument('model_path', type=pathlib.Path)
     parser.add_argument('run_dir', type=pathlib.Path)
+    parser.add_argument('output_path', type=pathlib.Path)
     parser.add_argument('guides', type=str, nargs='+')
     parser.add_argument('--time_limit', type=float, default=10.)
     parser.add_argument('--perturbation_moves', type=int, default=20)
     parser.add_argument('--use_gpu', action='store_true')
+    
+    
     args = parser.parse_args()
+    args.output_path.mkdir(parents=True, exist_ok=True)
     params = json.load(open(args.model_path.parent / 'params.json'))
     if 'efeat_drop_idx' in params:
         test_set = datasets.TSPDataset(args.data_path, feat_drop_idx=params['efeat_drop_idx'])
@@ -51,13 +55,14 @@ if __name__ == '__main__':
 
         model.load_state_dict(checkpoint['model_state_dict'])
         model.eval()
-
+    print('1',flush=True)
     #pbar = tqdm.tqdm(test_set.instances)
     gaps = []
     search_progress = []
+    cnt = 0
     for instance in test_set.instances:
         G = nx.read_gpickle(test_set.root_dir / instance)
-
+        num_nodes = G.number_of_nodes()
         opt_cost = gnngls.optimal_cost(G, weight='weight')
 
         t = time.time()
@@ -75,26 +80,25 @@ if __name__ == '__main__':
             with torch.no_grad():
                 y_pred = model(H, x)
             regret_pred = test_set.scalers['regret'].inverse_transform(y_pred.cpu().numpy())
-
+            regret      = np.abs(test_set.scalers['regret'].inverse_transform(y.cpu().numpy()))
+            
             es = H.ndata['e'].cpu().numpy()
             for e, regret_pred_i in zip(es, regret_pred):
                 G.edges[e]['regret_pred'] = np.maximum(regret_pred_i.item(), 0)
+
+            for e, regret_i in zip(es, regret):
+                G.edges[e]['regret'] = np.maximum(regret_i.item(), 0)
 
             init_tour = algorithms.nearest_neighbor(G, 0, weight='regret_pred')
             
         else:
             init_tour = algorithms.nearest_neighbor(G, 0, weight='weight')
 
-        num_nodes = G.number_of_nodes()
-        # atsp_edge_weight, _ = nx.attr_matrix(G, 'weight')
-        # tsp = TSPExact(atsp_edge_weight)
-        # tsp_edge_weight = tsp.cost_matrix
-        # tsp_tour = tsp.tranfer_tour(init_tour, num_nodes)
-        # tsp_G = nx.Graph(np.triu(tsp_edge_weight))
+        print(regret, flush=True)
+        
         value = 1e6 * num_nodes / 2
         init_cost = gnngls.tour_cost(G, init_tour)
-        
-        best_tour, best_cost, search_progress_i = algorithms.guided_local_search(G, init_tour, init_cost,
+        best_tour, best_cost, search_progress_i, cnt_ans = algorithms.guided_local_search(G, init_tour, init_cost,
                                                                                  t + args.time_limit, weight='weight',
                                                                                  guides=args.guides,
                                                                                  perturbation_moves=args.perturbation_moves,
@@ -107,12 +111,38 @@ if __name__ == '__main__':
             search_progress.append(row)
         best_cost += value
         opt_cost  += value
-     
+        
+        edge_weight, _ = nx.attr_matrix(G, 'weight')
+        regret, _ = nx.attr_matrix(G, 'regret')
+        regret_pred, _ = nx.attr_matrix(G, 'regret_pred')
+        with open(args.output_path / f"instance{cnt}.txt", "w") as f:
+            # Save array1
+            f.write("edge_weight:\n")
+            np.savetxt(f, edge_weight, fmt="%d", delimiter=" ")
+            f.write("\n")
+
+            # Save array2
+            f.write("regret:\n")
+            np.savetxt(f, regret, fmt="%d", delimiter=" ")
+            f.write("\n")
+
+            # Save array3
+            f.write("regret_pred:\n")
+            np.savetxt(f, regret_pred, fmt="%d", delimiter=" ")
+            f.write("\n")
+
+            f.write(f"opt_cost: {opt_cost}\n")
+            f.write(f"num_iterations: {cnt_ans}\n")
+            f.write(f"best_cost: {best_cost}\n")
+
+        
+       
         gap = (best_cost / opt_cost - 1) * 100
         gaps.append(gap)
-        print(f'best_cost {best_cost} opt_cost {opt_cost}', flush=True)
-        print('Avg Gap: {:.4f}'.format(np.mean(gaps)), flush=True)
+        print('Avg Gap: {:.4f}'.format(np.mean(gaps)))
 
+        cnt += 1
+        
         
         
 

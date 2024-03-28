@@ -5,14 +5,7 @@ import lkh
 import os
 import gnngls
 
-def convert_adj_string(adjacency_matrix):
-  ans = ''
-  n = adjacency_matrix.shape[0]
-  for i in range(n):
-    # Iterate over columns up to the diagonal
-      for j in range(n):
-        ans += str(adjacency_matrix[i][j]) + " "
-  return ans
+
 
 def create_tsplib95_string(adjacency_matrix):
     # Get the shape of the matrix
@@ -50,8 +43,8 @@ def compute_tour_cost(tour, adjacency_matrix):
     return cost
 
 all_instances_lower_triangle_tour_cost = 'adj,tour,cost\n'
-number_instances = 10
-output_dir = f"../tsplib95_{number_instances}_instances_64_node"
+number_instances = 2000
+output_dir = f"../tsplib95_{number_instances}_instances_2000_node"
 os.mkdir(output_dir)
 input_dir = "generated_tsp_tasks_64_v2"
 
@@ -81,7 +74,7 @@ for i in range(number_instances):
 #       # Write the string into the file
 #       file.write(string_problem)
 
-  all_instances_lower_triangle_tour_cost += convert_adj_string(adjacency_matrix)+','+" ".join(map(str, tour))+','+str(cost)+'\n'
+  all_instances_lower_triangle_tour_cost += gnngls.convert_adj_string(adjacency_matrix)+','+" ".join(map(str, tour))+','+str(cost)+'\n'
  
 with open(f'{output_dir}/all_instances_adj_tour_cost.txt', 'w') as file:
       # Write the string into the file

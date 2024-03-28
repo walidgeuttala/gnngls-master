@@ -117,13 +117,12 @@ def compute_tour_cost(tour, adjacency_matrix):
 def local_search(init_tour, init_cost, D, first_improvement=False):
     cur_tour, cur_cost = init_tour, init_cost
     search_progress = []
-
+    cnt = 0
     improved = True
-    while improved:
+    while improved and cnt < 100:
 
         improved = False
         for operator in [operators.two_opt_a2a, operators.relocate_a2a]:
-
             delta, new_tour = operator(cur_tour, D, first_improvement)
             if delta < 0:
                 improved = True
@@ -133,8 +132,9 @@ def local_search(init_tour, init_cost, D, first_improvement=False):
                     'time': time.time(),
                     'cost': cur_cost
                 })
-
-    return cur_tour, cur_cost, search_progress
+            cnt += 1
+    
+    return cur_tour, cur_cost, search_progress,  cnt 
 
 
 def guided_local_search(G, init_tour, init_cost, t_lim, weight='weight', guides=['weight'], perturbation_moves=30,
@@ -143,10 +143,12 @@ def guided_local_search(G, init_tour, init_cost, t_lim, weight='weight', guides=
     nx.set_edge_attributes(G, 0, 'penalty')
 
     edge_weight, _ = nx.attr_matrix(G, weight)
-    
-    cur_tour, cur_cost, search_progress = local_search(init_tour, init_cost, edge_weight, first_improvement)
+    cnt_ans = 0
+    cur_tour, cur_cost, search_progress, cnt = local_search(init_tour, init_cost, edge_weight, first_improvement)
+    cnt_ans += cnt
     best_tour, best_cost = cur_tour, cur_cost
     iter_i = 0
+    
     while time.time() < t_lim:
         guide = guides[iter_i % len(guides)]  # option change guide ever iteration (as in KGLS)
 
@@ -163,10 +165,8 @@ def guided_local_search(G, init_tour, init_cost, t_lim, weight='weight', guides=
                     max_util_e = e
 
             G.edges[max_util_e]['penalty'] += 1.
-
             edge_penalties, _ = nx.attr_matrix(G, 'penalty')
             edge_weight_guided = edge_weight + k * edge_penalties
-
             # apply operator to edge
             for n in max_util_e:
                 if n != 0:  # not the depot
@@ -187,13 +187,15 @@ def guided_local_search(G, init_tour, init_cost, t_lim, weight='weight', guides=
                             })
 
                         moves += moved
-
+                        cnt_ans += 1
         # optimisation
-        cur_tour, cur_cost, new_search_progress = local_search(cur_tour, cur_cost, edge_weight, first_improvement)
+        cur_tour, cur_cost, new_search_progress, cnt = local_search(cur_tour, cur_cost, edge_weight, first_improvement)
         search_progress += new_search_progress
         if cur_cost < best_cost:
             best_tour, best_cost = cur_tour, cur_cost
 
         iter_i += 1
+    
+    cnt_ans += cnt
 
-    return best_tour, best_cost, search_progress
+    return best_tour, best_cost, search_progress, cnt_ans

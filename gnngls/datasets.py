@@ -19,6 +19,12 @@ def set_features(G):
 
 def set_labels(G):
     optimal_cost = get_optimal_cost(G)
+    if optimal_cost == 0:
+        optimal_cost = 1e-6
+    if optimal_cost < 0:
+        value = -1.
+    else:
+        value = 1.
     for e in G.edges:
         regret = 0.
 
@@ -26,7 +32,7 @@ def set_labels(G):
 
             tour = fixed_edge_tour(G, e)
             cost = tour_cost(G, tour)
-            regret = (cost - optimal_cost) / optimal_cost
+            regret = (cost - optimal_cost) / optimal_cost * value
             
         G.edges[e]['regret'] = regret
 
@@ -72,7 +78,7 @@ class TSPDataset(torch.utils.data.Dataset):
         # only works for homogenous datasets
         G = nx.read_gpickle(self.root_dir / self.instances[0])
         lG = nx.line_graph(G)
-        lG = lG.to_undirected()
+        #lG = lG.to_undirected()
         for n in lG.nodes:
             lG.nodes[n]['e'] = n
         
@@ -101,7 +107,6 @@ class TSPDataset(torch.utils.data.Dataset):
             features.append(G.edges[e]['features'])
             regret.append(G.edges[e]['regret'])
             in_solution.append(G.edges[e]['in_solution'])
-
         features = np.vstack(features)
         features_transformed = self.scalers['features'].transform(features)
         features_transformed = np.delete(features_transformed, self.feat_drop_idx, axis=1)
