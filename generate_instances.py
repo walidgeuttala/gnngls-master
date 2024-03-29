@@ -44,7 +44,7 @@ def get_solved_instances2(n_nodes, n_instances, all_instances):
     # Open the file in read mode
    
     for i in range(n_instances):
-        line = linecache.getline(all_instances, i+1).strip()
+        line = linecache.getline(all_instances, i+2001).strip()
         G = nx.Graph()
         adj, opt_solution, cost = line.split(',')
         adj = adj.split(' ')
