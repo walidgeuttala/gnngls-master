@@ -63,7 +63,7 @@ class TSPDataset(torch.utils.data.Dataset):
             instances_file = pathlib.Path(instances_file)
         self.root_dir = instances_file.parent
 
-        self.instances = [line.strip() for line in open(instances_file)]
+        self.instances = sorted([line.strip() for line in open(instances_file)])
 
         if scalers_file is None:
             scalers_file = self.root_dir / 'scalers.pkl'

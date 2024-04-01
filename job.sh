@@ -20,4 +20,5 @@
 #python preprocess_dataset2.py ../generatedn2000
 #python train.py ../generatedn2000 ../model_result
 #python test_save2.py ../generatedn2000/test.txt ../gnngls/models/tsp100/checkpoint_best_val.pt ../runsnv2000 regret_pred ../outv2n2000
-python generate_instances.py 8000 128 ../tsplib95_10000_instances_64_node/tsp_all_instances_adj_tour_cost.txt ../generatedn8000
+#python generate_instances.py 8000 128 ../tsplib95_10000_instances_64_node/tsp_all_instances_adj_tour_cost.txt ../generatedn8000
+python test_regret.py
