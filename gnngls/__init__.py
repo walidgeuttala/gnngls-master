@@ -1,8 +1,8 @@
 #import concorde.tsp as concorde
-import lkh
+#import lkh
 import networkx as nx
 import numpy as np
-import tsplib95
+#import tsplib95
 from matplotlib import colors
 import linecache
 
