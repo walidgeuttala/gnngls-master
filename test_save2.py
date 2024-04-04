@@ -12,7 +12,13 @@ import networkx as nx
 import numpy as np
 import pandas as pd
 import torch
+
 #import tqdm.auto as tqdm
+def tour_cost2(tour, weight):
+    c = 0
+    for e in zip(tour[:-1], tour[1:]):
+        c += weight[e]
+    return c
 
 import gnngls
 from gnngls import algorithms, models, datasets
@@ -57,6 +63,7 @@ if __name__ == '__main__':
         model.eval()
     #pbar = tqdm.tqdm(test_set.instances)
     gaps = []
+    gaps2 = []
     search_progress = []
     cnt = 0
     for instance in test_set.instances:
@@ -93,7 +100,28 @@ if __name__ == '__main__':
         else:
             init_tour = algorithms.nearest_neighbor(G, 0, weight='weight')
 
-        
+        # g = nx.DiGraph()
+        # original_wieghts, _ = nx.attr_matrix(G, 'weight')
+        # original_wieghts = original_wieghts[64:, :64]
+        # regret_pred, _ = nx.attr_matrix(G, 'regret_pred')
+        # regret_pred = regret_pred[64:, :64]
+        # g = nx.from_numpy_matrix(original_wieghts)
+        # orignal_tour = [x for idx, x in enumerate(init_tour) if idx % 2 == 0]
+        # Optionally, set the edge weights
+        for i in range(64):
+            for j in range(i+1,64):
+                if i != j:
+                    G.add_edge(i, j, weight=float(1e6), regret_pred=float(100), regret=float(100))
+        for i in range(64,128):
+            for j in range(64+i+1,128):
+                if i != j:
+                    G.add_edge(i, j, weight=float(1e6), regret_pred=float(100), regret=float(100))
+        # for i, j in g.edges():
+        #     g.edges[i, j]['weight'] = original_wieghts[i, j]
+        #     g.edges[i, j]['regret_pred'] = regret_pred[i, j]
+        #     if i == j:
+        #         g.edges[i, j]['weight'] = float(1e6)
+        #         g.edges[i, j]['regret_pred'] = float(1e6)
         value = 1e6 * num_nodes / 2
         init_cost = gnngls.tour_cost(G, init_tour)
         best_tour, best_cost, search_progress_i, cnt_ans = algorithms.guided_local_search(G, init_tour, init_cost,
@@ -106,17 +134,42 @@ if __name__ == '__main__':
                 'instance': instance,
                 'opt_cost': opt_cost
             })
-            search_progress.append(row)
-        best_cost += value
+        for i in range(64):
+            for j in range(i+1, 64):
+                if i != j:
+                    G.remove_edge(i, j)
+        for i in range(64,128):
+            for j in range(64+i+1,128):
+                if i != j:
+                    G.remove_edge(i, j)
+        search_progress.append(row)
+        # print('tour : ',best_tour)
+        # edge_weight, _ = nx.attr_matrix(G, 'weight')
+        # print('orignal cost: ', tour_cost2(best_tour, edge_weight)+value)
+        # print('init_tour cost: ', tour_cost2(init_tour, edge_weight)+value)
+        # print(best_cost)
         opt_cost  += value
-        
+        init_cost += value
+        best_cost += value
+        if init_cost != best_cost:
+            print('opt : ',opt_cost)
+            print('init : ',init_cost)
+            print('best : ',best_cost)
+        # print(init_tour)
+        # orignal_tour = [x for idx, x in enumerate(init_tour) if idx % 2 == 0]
+        # print(orignal_tour)
+        # print(opt_cost)
+        # print(init_cost)
         edge_weight, _ = nx.attr_matrix(G, 'weight')
+        # orignal_weights = edge_weight[ 64:, :64]
+        # print(orignal_weights)
+        # print('orignal cost: ', tour_cost2(orignal_tour, orignal_weights))
         regret, _ = nx.attr_matrix(G, 'regret')
         regret_pred, _ = nx.attr_matrix(G, 'regret_pred')
-        if cnt == 0:
-            print(edge_weight,flush=True)
-            print(regret,flush=True)
-            print(regret_pred,flush=True)
+        # if cnt == 0:
+        #     print(edge_weight,flush=True)
+        #     print(regret,flush=True)
+        #     print(regret_pred,flush=True)
         with open(args.output_path / f"instance{cnt}.txt", "w") as f:
             # Save array1
             f.write("edge_weight:\n")
@@ -135,14 +188,16 @@ if __name__ == '__main__':
 
             f.write(f"opt_cost: {opt_cost}\n")
             f.write(f"num_iterations: {cnt_ans}\n")
+            f.write(f"init_cost: {init_cost}\n")
             f.write(f"best_cost: {best_cost}\n")
-
-        
        
         gap = (best_cost / opt_cost - 1) * 100
+        gap2 = (init_cost / opt_cost - 1) * 100
         gaps.append(gap)
-        print('Avg Gap: {:.4f}'.format(np.mean(gaps)))
-
+        gaps2.append(gap2)
+        print('Avg Gap init: {:.4f}'.format(np.mean(gaps2)))
+        print('Avg Gap best: {:.4f}'.format(np.mean(gaps)))
+        
         cnt += 1
         
         

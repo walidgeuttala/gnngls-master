@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -A p_gnn001               # Account name to be debited
 #SBATCH --job-name=tsp22          # Job name
-#SBATCH --time=2-00:00:00        # Maximum walltime (30 minutes)
+#SBATCH --time=0-12:00:00        # Maximum walltime (30 minutes)
 #SBATCH --partition=ai           # Select the ai partition
 #SBATCH --gres=gpu:1          # Request 1 to 4 GPUs per node
 #SBATCH --mem-per-cpu=30000       # Memory per CPU core (16 GB)
@@ -18,8 +18,8 @@
 #python train.py ../generated ../model_result --use_gpu
 #python test_me.py
 #python preprocess_dataset2.py ../generatedn2000
-python train.py ../cleaned_data_n5900 ../model_result_n5900 --use_gpu
-python test_save2.py ../cleaned_data_n5900/test.txt ../model_result_n5900/checkpoint_best_val.pt ../run_result_n5900 regret_pred ../test_tsp_n5900 --use_gpu
+#python train.py ../cleaned_data_n5900 ../model_result_n5900 --use_gpu
+python test_save2.py ../cleaned_data_n5900/test.txt ../model_result_n5900/checkpoint_best_val.pt ../run_result_n5900 regret_pred ../test_tsp_n5900v2 --use_gpu
 #python generate_instances.py 8000 128 ../tsplib95_10000_instances_64_node/tsp_all_instances_adj_tour_cost.txt ../generatedn8000
 #python test_regret.py
 #python remove_extra_edges.py

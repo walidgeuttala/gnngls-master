@@ -80,7 +80,7 @@ if __name__ == '__main__':
     parser.add_argument('--min_delta', type=float, default=1e-4, help='Early stopping min delta')
     parser.add_argument('--patience', type=int, default=20, help='Early stopping patience')
     parser.add_argument('--batch_size', type=int, default=32, help='Batch size')
-    parser.add_argument('--n_epochs', type=int, default=200, help='Number of epochs')
+    parser.add_argument('--n_epochs', type=int, default=100, help='Number of epochs')
     parser.add_argument('--checkpoint_freq', type=int, default=20, help='Checkpoint frequency')
     parser.add_argument('--target', type=str, default='regret', choices=['regret', 'in_solution'])
     parser.add_argument('--use_gpu', action='store_true')
@@ -116,9 +116,9 @@ if __name__ == '__main__':
         criterion = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight)
 
     train_loader = DataLoader(train_set, batch_size=args.batch_size, shuffle=True, collate_fn=dgl.batch,
-                              num_workers=4, pin_memory=True)
+                              num_workers=16, pin_memory=True)
     val_loader = DataLoader(val_set, batch_size=args.batch_size, shuffle=True, collate_fn=dgl.batch,
-                            num_workers=4, pin_memory=True)
+                            num_workers=16, pin_memory=True)
 
     timestamp = datetime.datetime.now().strftime('%b%d_%H-%M-%S')
     run_name = f'{timestamp}_{uuid.uuid4().hex}'
@@ -141,7 +141,7 @@ if __name__ == '__main__':
             'Train Loss': '{:.4f}'.format(epoch_loss),
             'Validation Loss': '{:.4f}'.format(epoch_val_loss),
         })
-
+        
         if args.checkpoint_freq is not None and epoch > 0 and epoch % args.checkpoint_freq == 0:
             checkpoint_name = f'checkpoint_{epoch}.pt'
             save(model, optimizer, epoch, epoch_loss, epoch_val_loss, log_dir / checkpoint_name)

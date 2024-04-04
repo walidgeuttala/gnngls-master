@@ -34,7 +34,7 @@ class TSPExact:
         ------------------------------------------------------------------------
           |A'   |B'   |C'   |A    |B    |C    |
         A'|0    |INF  |INF  |-INF |dBA  |dCA  |
-        B'|INF  |0    |INF  |dAB  |-INF |dCB  |
+        B'|INF  |0    |INF  |dAB  |-INF |dCB  | 
         C'|INF  |INF  |0    |dAC  |dBC  |-INF |
         A |-INF |dAB  |dAC  |0    |INF  |INF  |
         B |dBA  |-INF |dBC  |INF  |0    |INF  |
