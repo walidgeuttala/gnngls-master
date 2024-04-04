@@ -148,7 +148,7 @@ def guided_local_search(G, init_tour, init_cost, t_lim, weight='weight', guides=
     cnt_ans += cnt
     best_tour, best_cost = cur_tour, cur_cost
     iter_i = 0
-    
+    print(cur_tour)
     while time.time() < t_lim:
         guide = guides[iter_i % len(guides)]  # option change guide ever iteration (as in KGLS)
 
@@ -160,7 +160,9 @@ def guided_local_search(G, init_tour, init_cost, t_lim, weight='weight', guides=
             max_util = 0
             max_util_e = None
             for e in zip(cur_tour[:-1], cur_tour[1:]):
+                
                 util = G.edges[e][guide] / (1 + G.edges[e]['penalty'])
+                
                 if util > max_util or max_util_e is None:
                     max_util = util
                     max_util_e = e

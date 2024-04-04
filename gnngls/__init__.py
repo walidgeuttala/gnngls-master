@@ -20,6 +20,12 @@ def tour_cost(G, tour, weight='weight'):
         c += G.edges[e][weight]
     return c
 
+def tour_cost2(tour, weight):
+    c = 0
+    for e in zip(tour[:-1], tour[1:]):
+        c += weight[e]
+    return c
+
 
 def is_equivalent_tour(tour_a, tour_b):
     if tour_a == tour_b[::-1]:
@@ -52,7 +58,7 @@ def is_valid_tour(G, tour):
 #     return tour
 
 
-def tranfer_tour(self, tour, x):
+def tranfer_tour(tour, x):
     result_list = []
     for num in tour:
         result_list.append(num)
