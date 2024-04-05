@@ -14,9 +14,9 @@ from sklearn.preprocessing import MinMaxScaler
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Preprocess a dataset.')
     parser.add_argument('dir', type=pathlib.Path)
-    parser.add_argument('--n_train', type=int, default=5000)
-    parser.add_argument('--n_test', type=int, default=450)
-    parser.add_argument('--n_val', type=int, default=450)
+    parser.add_argument('--n_train', type=int, default=3000)
+    parser.add_argument('--n_test', type=int, default=1450)
+    parser.add_argument('--n_val', type=int, default=1450)
     args = parser.parse_args()
 
     if (args.dir / 'scalers.pkl').is_file():
@@ -37,12 +37,13 @@ if __name__ == '__main__':
             print(f'{file_name} contains {len(data_set)} instances.')
 
     scalers = {
-        'features': MinMaxScaler(),
+        'weight': MinMaxScaler(),
         'regret': MinMaxScaler()
     }
 
     for instance_path in tqdm.tqdm(train_set, total=len(train_set)):
-        G = nx.read_gpickle(instance_path)
+        with open(instance_path, 'rb') as file:
+            G = pickle.load(file)
 
         for k in scalers:
             scalers[k].partial_fit(np.vstack([G.edges[e][k] for e in G.edges]))

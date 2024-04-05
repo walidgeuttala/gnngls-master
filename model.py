@@ -115,7 +115,8 @@ class GNN(torch.nn.Module):
         super(GNN, self).__init__()
 
         self.alpha = nn.Parameter(torch.ones(1) * alpha, requires_grad=learn_alpha)
-        output_dim = hidden_dim if jumping_knowledge else num_classes
+        # output_dim = hidden_dim if jumping_knowledge else num_classes
+        output_dim = num_classes
         if num_layers == 1:
             self.convs = ModuleList([get_conv(conv_type, num_features, output_dim, self.alpha)])
         else:
@@ -124,10 +125,10 @@ class GNN(torch.nn.Module):
                 self.convs.append(get_conv(conv_type, hidden_dim, hidden_dim, self.alpha))
             self.convs.append(get_conv(conv_type, hidden_dim, output_dim, self.alpha))
 
-        if jumping_knowledge is not None:
-            input_dim = hidden_dim * num_layers if jumping_knowledge == "cat" else hidden_dim
-            self.lin = Linear(input_dim, num_classes)
-            self.jump = JumpingKnowledge(mode=jumping_knowledge, channels=hidden_dim, num_layers=num_layers)
+        # if jumping_knowledge is not None:
+        #     input_dim = hidden_dim * num_layers if jumping_knowledge == "cat" else hidden_dim
+        #     self.lin = Linear(input_dim, num_classes)
+        #     self.jump = JumpingKnowledge(mode=jumping_knowledge, channels=hidden_dim, num_layers=num_layers)
 
         self.num_layers = num_layers
         self.dropout = dropout
@@ -145,9 +146,9 @@ class GNN(torch.nn.Module):
                     x = F.normalize(x, p=2, dim=1)
             xs += [x]
 
-        if self.jumping_knowledge is not None:
-            x = self.jump(xs)
-            x = self.lin(x)
+        # if self.jumping_knowledge is not None:
+        #     x = self.jump(xs)
+        #     x = self.lin(x)
 
         return x # torch.nn.functional.log_softmax(x, dim=1)
 
