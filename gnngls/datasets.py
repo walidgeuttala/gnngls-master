@@ -87,7 +87,7 @@ class TSPDataset(torch.utils.data.Dataset):
         
         # why he add the id number of the edegs in the G graph
         self.G = dgl.from_networkx(lG, node_attrs=['e'])
-        
+
     def __len__(self):
         return len(self.instances)
 
@@ -126,5 +126,5 @@ class TSPDataset(torch.utils.data.Dataset):
         edge_index = torch.stack([src, dst], dim=0)
         data = Data(x=H.ndata['weight'], y=H.ndata['regret'], edge_index=edge_index)
         data.original_regret = H.ndata['original_regret']
-        print('data directed : ', Data.is_directed())
+
         return data
