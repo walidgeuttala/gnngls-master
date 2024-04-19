@@ -3,8 +3,8 @@ import networkx as nx
 import os 
 
 
-dir_path = '../generatedn8000/'
-output_path = '../cleaned_data_n5900/'
+dir_path = '../../cleaned_data_n5900/'
+output_path = '../../tsp_n5900/'
 files = [dir_path+file for file in os.listdir(dir_path)]
 
 
@@ -15,6 +15,6 @@ idx = 2000
 for file in files:
     G = nx.read_gpickle(file) 
     G.remove_edges_from(edges_to_remove1)
-    G.remove_edges_from(edges_to_remove2)
+    #G.remove_edges_from(edges_to_remove2)
     nx.write_gpickle(G, output_path+f'instance{idx}.pkl')
     idx += 1

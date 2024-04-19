@@ -14,8 +14,8 @@
 # Your job commands here
 #python generate_instances.py
 # python tsp_solving.py
-python generate_instances.py 2000 128 ../tsplib95_10000_instances_64_node/tsp_all_instances_adj_tour_cost.txt ../generatedn2000
-python preprocess_dataset.py ../generatedn2000
-python train.py ../generatedn2000 ../model_result
-python test_save.py ../generatedn2000/test.txt ../gnngls/models/tsp100/checkpoint_best_val.pt ../runsn2000 regret_pred ../outn2000
+#python generate_instances.py 2000 128 ../tsplib95_10000_instances_64_node/tsp_all_instances_adj_tour_cost.txt ../generatedn2000
+#python preprocess_dataset.py ../generatedn2000
+#python train.py ../atsp_n5900 ../model_result_try
+python test_save.py ../model_result_try/test.txt ../gnngls/models/tsp100/checkpoint_best_val.pt ../runsn2000 regret_pred ../outn2000
 #python test_me.py

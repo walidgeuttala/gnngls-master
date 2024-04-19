@@ -17,6 +17,18 @@ import torch
 import gnngls
 from gnngls import algorithms, models, datasets
 from atps_to_tsp import TSPExact
+
+def add_diag(t1):
+    t2 = torch.zeros(64, 64, dtype=torch.float32)
+    cnt = 0
+    for i in range(64):
+        for j in range(64):
+            if i == j:
+                continue
+            t2[i][j] = t1[cnt]
+            cnt += 1
+    return t2
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Test model')
     parser.add_argument('data_path', type=pathlib.Path)
@@ -37,7 +49,7 @@ if __name__ == '__main__':
         device = torch.device('cuda' if args.use_gpu and torch.cuda.is_available() else 'cpu')
         print('device =', device)
 
-        _, feat_dim = test_set[0].ndata['features'].shape
+        _, feat_dim = test_set[0].ndata['weight'].shape
 
         model = models.EdgePropertyPredictionModel(
             feat_dim,
@@ -70,7 +82,7 @@ if __name__ == '__main__':
         if 'regret_pred' in args.guides:
             H = test_set.get_scaled_features(G).to(device)
 
-            x = H.ndata['features']
+            x = H.ndata['weight']
             y = H.ndata['regret']
             with torch.no_grad():
                 y_pred = model(H, x)
@@ -84,6 +96,36 @@ if __name__ == '__main__':
             
         else:
             init_tour = algorithms.nearest_neighbor(G, 0, weight='weight')
+
+
+
+
+
+
+
+
+        with open(args.output_path / f"instance{cnt}.txt", "w") as f:
+            # Save array1
+            f.write("edge_weight:\n")
+            np.savetxt(f, edge_weight, fmt="%.8f", delimiter=" ")
+            f.write("\n")
+
+            # Save array2
+            f.write("regret:\n")
+            np.savetxt(f, add_diag(H.y.cpu()).numpy(), fmt="%.8f", delimiter=" ")
+            f.write("\n")
+
+            # Save array3
+            f.write("regret_pred:\n")
+            np.savetxt(f, add_diag(y_pred.cpu()).numpy(), fmt="%.8f", delimiter=" ")
+            f.write("\n")
+
+            f.write(f"opt_cost: {opt_cost}\n")
+            f.write(f"num_iterations: {cnt_ans}\n")
+            f.write(f"init_cost: {init_cost}\n")
+            f.write(f"best_cost: {best_cost}\n")
+
+
 
         num_nodes = G.number_of_nodes()
         # atsp_edge_weight, _ = nx.attr_matrix(G, 'weight')

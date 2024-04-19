@@ -104,18 +104,18 @@ class TSPDataset(torch.utils.data.Dataset):
         for i in range(self.G.number_of_nodes()):
             e = tuple(self.G.ndata['e'][i].numpy())  # corresponding edge
 
-            features.append(G.edges[e]['features'])
+            features.append(G.edges[e]['weight'])
             regret.append(G.edges[e]['regret'])
             in_solution.append(G.edges[e]['in_solution'])
         features = np.vstack(features)
-        features_transformed = self.scalers['features'].transform(features)
+        features_transformed = self.scalers['weight'].transform(features)
         features_transformed = np.delete(features_transformed, self.feat_drop_idx, axis=1)
         regret = np.vstack(regret)
         regret_transformed = self.scalers['regret'].transform(regret)
         in_solution = np.vstack(in_solution)
 
         H = copy.deepcopy(self.G)
-        H.ndata['features'] = torch.tensor(features_transformed, dtype=torch.float32)
+        H.ndata['weight'] = torch.tensor(features_transformed, dtype=torch.float32)
         H.ndata['regret'] = torch.tensor(regret_transformed, dtype=torch.float32)
         H.ndata['in_solution'] = torch.tensor(regret, dtype=torch.float32)
         return H

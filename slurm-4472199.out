@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/train.py", line 90, in <module>
+    train_set = datasets.TSPDataset(args.data_dir / 'train.txt')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/gnngls/datasets.py", line 66, in __init__
+    self.instances = sorted([line.strip() for line in open(instances_file)])
+                                                      ^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '../cleaned_data_n5900/train.txt'
