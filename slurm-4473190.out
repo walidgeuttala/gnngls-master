@@ -1,0 +1,15 @@
+device = cuda
+torch.Size([4032, 1])
+torch.Size([4032, 1])
+torch.Size([4032, 1])
+torch.Size([4032, 1])
+torch.Size([4032, 1])
+torch.Size([4032, 1])
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/test.py", line 132, in <module>
+    init_tour = algorithms.nearest_neighbor(G, 0, weight='regret_pred')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py", line 14, in nearest_neighbor
+    j, dist = min(neighbours, key=lambda e: e[1])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: min() iterable argument is empty

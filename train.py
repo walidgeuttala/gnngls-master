@@ -113,7 +113,7 @@ if __name__ == '__main__':
     parser.add_argument('--patience', type=int, default=5, help='Early stopping patience')
     parser.add_argument('--batch_size', type=int, default=32, help='Batch size')
     parser.add_argument('--n_epochs', type=int, default=100, help='Number of epochs')
-    parser.add_argument('--checkpoint_freq', type=int, default=20, help='Checkpoint frequency')
+    parser.add_argument('--checkpoint_freq', type=int, default=1, help='Checkpoint frequency')
     parser.add_argument('--target', type=str, default='regret', choices=['regret', 'in_solution'])
     parser.add_argument('--use_gpu', action='store_true')
     args = parser.parse_args()

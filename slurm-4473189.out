@@ -1,0 +1,9 @@
+device = cuda
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/test.py", line 144, in <module>
+    np.savetxt(f, add_diag(H.ndata['weight'].cpu()).numpy(), fmt="%.8f", delimiter=" ")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/test.py", line 29, in add_diag
+    t2[i][j] = t1[cnt]
+               ~~^^^^^
+IndexError: index 4032 is out of bounds for dimension 0 with size 4032
