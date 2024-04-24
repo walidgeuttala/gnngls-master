@@ -1,0 +1,75 @@
+device = cuda
+  0%|          | 0/10 [00:00<?, ?it/s]  0%|          | 0/10 [01:52<?, ?it/s, Train Loss=0.0145, Validation Loss=0.0056, correlation : =0.5734, cosin correlation : =0.9520, gap : =247.0487] 10%|█         | 1/10 [01:52<16:51, 112.42s/it, Train Loss=0.0145, Validation Loss=0.0056, correlation : =0.5734, cosin correlation : =0.9520, gap : =247.0487] 10%|█         | 1/10 [03:38<16:51, 112.42s/it, Train Loss=0.0043, Validation Loss=0.0055, correlation : =0.6065, cosin correlation : =0.9548, gap : =257.1035] 20%|██        | 2/10 [03:38<14:31, 108.90s/it, Train Loss=0.0043, Validation Loss=0.0055, correlation : =0.6065, cosin correlation : =0.9548, gap : =257.1035] 20%|██        | 2/10 [05:25<14:31, 108.90s/it, Train Loss=0.0043, Validation Loss=0.0057, correlation : =0.6099, cosin correlation : =0.9550, gap : =263.7582] 30%|███       | 3/10 [05:25<12:35, 107.98s/it, Train Loss=0.0043, Validation Loss=0.0057, correlation : =0.6099, cosin correlation : =0.9550, gap : =263.7582] 30%|███       | 3/10 [07:12<12:35, 107.98s/it, Train Loss=0.0042, Validation Loss=0.0054, correlation : =0.6385, cosin correlation : =0.9576, gap : =257.4710] 40%|████      | 4/10 [07:12<10:44, 107.35s/it, Train Loss=0.0042, Validation Loss=0.0054, correlation : =0.6385, cosin correlation : =0.9576, gap : =257.4710] 40%|████      | 4/10 [08:18<12:28, 124.67s/it, Train Loss=0.0042, Validation Loss=0.0054, correlation : =0.6385, cosin correlation : =0.9576, gap : =257.4710]
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 322, in <module>
+    main()
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 315, in main
+    val_loss = run(args)
+               ^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 207, in run
+    epoch_loss = train(model, train_loader, args.target, criterion, optimizer, device)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 50, in train
+    y_pred = model(batch, x)
+             ^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/gnngls/models.py", line 91, in forward
+    for l in self.message_passing_layers:
+            ^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/gnngls/models.py", line 56, in forward
+    h = self.message_passing(x, G=G).view(G.number_of_nodes(), -1)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/container.py", line 217, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/gnngls/models.py", line 15, in forward
+    else:
+          
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/container.py", line 217, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/activation.py", line 101, in forward
+    return F.relu(input, inplace=self.inplace)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/functional.py", line 1473, in relu
+    result = torch.relu(input)
+             ^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/utils/data/_utils/signal_handling.py", line 66, in handler
+    _error_if_any_worker_fails()
+RuntimeError: DataLoader worker (pid 687840) is killed by signal: Killed. 
+slurmstepd: error: Detected 1 oom-kill event(s) in StepId=4522591.batch. Some of your processes may have been killed by the cgroup out-of-memory handler.

@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 328, in <module>
+    main()
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 321, in main
+    val_loss = run(args)
+               ^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 158, in run
+    train_set = datasets.TSPDataset(args.data_dir / 'train.txt')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/gnngls/datasets.py", line 149, in __init__
+    self.G, self.edge_id = directed_string_graph(G)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/gnngls/datasets.py", line 123, in directed_string_graph
+    for idx in len(edge_types):
+TypeError: 'int' object is not iterable

@@ -1,0 +1,4 @@
+tensor([   0,    1,    2,  ..., 4029, 4030, 4031])
+tensor([   0,    1,    2,  ..., 4029, 4030, 4031])
+device = cuda
+  0%|          | 0/10 [00:00<?, ?it/s]slurmstepd: error: *** JOB 4522445 ON x1001c1s0b0n1 CANCELLED AT 2024-04-24T12:06:36 ***

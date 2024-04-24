@@ -111,18 +111,19 @@ def directed_string_graph(G1):
             j = 0
             i += 1
 
-    edge_types = {('node', 'ss', 'node'): ss,
-              ('node', 'st', 'node'): st,
-              ('node', 'ts', 'node'): ts,
-              ('node', 'tt', 'node'): tt,
-              ('node', 'pp', 'node'): pp}
+    edge_types = {('node1', 'ss', 'node1'): ss,
+              ('node2', 'st', 'node2'): st,
+              ('node3', 'ts', 'node3'): ts,
+              ('node4', 'tt', 'node4'): tt,
+              ('node5', 'pp', 'node5'): pp}
     
     G2 = dgl.heterograph(edge_types)
     G2 = dgl.add_reverse_edges(G2)
-    for idx, edge in enumerate(G1.edges()):
-        edge_id[edge] = idx
-        G2.ndata['e'] = 
-
+    e_dict = dict()
+    for idx in range(len(edge_types)):
+        e_dict[f'node{idx+1}'] = torch.tensor(list(edge_id.keys())).clone()
+    G2.ndata['e'] = e_dict
+    # G2.ndata['e'] = torch.tensor(list(edge_id.keys())).clone()
     return G2, edge_id
 
 class TSPDataset(torch.utils.data.Dataset):
@@ -146,8 +147,9 @@ class TSPDataset(torch.utils.data.Dataset):
         # only works for homogenous datasets
         G = nx.read_gpickle(self.root_dir / self.instances[0])
         self.G, self.edge_id = directed_string_graph(G)
-        self.G.ndata['e'] = 
-        self.G = dgl.to_homogeneous(self.G)
+        # tranfer to hmogines graph
+        # self.G = dgl.to_homogeneous(self.G, ndata=['e'])
+        self.etypes = self.G.etypes
 
     def __len__(self):
         return len(self.instances)
@@ -179,7 +181,7 @@ class TSPDataset(torch.utils.data.Dataset):
         H.ndata['weight'] = torch.tensor(features_transformed, dtype=torch.float32)
         H.ndata['regret'] = torch.tensor(regret_transformed, dtype=torch.float32)
         H.ndata['in_solution'] = torch.tensor(in_solution, dtype=torch.float32)
-
+        H.ndata['e'] = self.G.ndata['e']
         return H
 
 

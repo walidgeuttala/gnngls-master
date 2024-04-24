@@ -12,7 +12,7 @@ import numpy as np
 import dgl.nn
 import torch
 import tqdm.auto as tqdm
-from torch.utils.data import DataLoader
+from dgl.dataloading import GraphDataLoader
 import itertools
 
 from torch.utils.tensorboard import SummaryWriter
@@ -164,14 +164,20 @@ def run(args):
 
     _, feat_dim = train_set[0].ndata['weight'].shape
     set_random_seed(1234)
-    model = models.EdgePropertyPredictionModel(
+    # model = models.EdgePropertyPredictionModel(
+    #     feat_dim,
+    #     args.embed_dim,
+    #     1,
+    #     args.n_layers,
+    #     n_heads=args.n_heads,
+    #     embed_dim2 = args.embed_dim2,
+    #     kj = args.kj
+    # ).to(device)
+    model = models.RGCN(
         feat_dim,
         args.embed_dim,
         1,
-        args.n_layers,
-        n_heads=args.n_heads,
-        embed_dim2 = args.embed_dim2,
-        kj = args.kj
+        train_set.etypes
     ).to(device)
 
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr_init)
@@ -186,9 +192,9 @@ def run(args):
         pos_weight = len(y) / y.sum() - 1
         criterion = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight)
 
-    train_loader = DataLoader(train_set, batch_size=args.batch_size, shuffle=False, collate_fn=dgl.batch,
+    train_loader = GraphDataLoader(train_set, batch_size=args.batch_size, shuffle=False,
                               num_workers=16, pin_memory=True)
-    val_loader = DataLoader(val_set, batch_size=args.batch_size, shuffle=False, collate_fn=dgl.batch,
+    val_loader = GraphDataLoader(val_set, batch_size=args.batch_size, shuffle=False,
                             num_workers=16, pin_memory=True)
 
     timestamp = datetime.datetime.now().strftime('%b%d_%H-%M-%S')
@@ -295,11 +301,11 @@ def parse_args():
 def main():
     search_space = {
         "embed_dim": [128],
-        "embd_dim2": [128*2],
+        "embd_dim2": [128],
         "n_layers": [4],
         "lr_init": [1e-3],
         "n_heads": [16],
-        "kj": ['cat']
+        "kj": ['cat'],
     }
 
     args = parse_args()

@@ -1,0 +1,56 @@
+device = cuda
+  0%|          | 0/10 [00:00<?, ?it/s]  0%|          | 0/10 [00:04<?, ?it/s]
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 328, in <module>
+    main()
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 321, in main
+    val_loss = run(args)
+               ^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 213, in run
+    epoch_loss = train(model, train_loader, args.target, criterion, optimizer, device)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 50, in train
+    y_pred = model(batch, x)
+             ^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/gnngls/models.py", line 92, in forward
+    h = l(G, h)
+        ^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/gnngls/models.py", line 56, in forward
+    h = self.message_passing(x, G=G).view(G.number_of_nodes(), -1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/gnngls/models.py", line 14, in forward
+    y = self.module(G, x).view(G.number_of_nodes(), -1)
+        ^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/dgl/nn/pytorch/conv/gatconv.py", line 278, in forward
+    if (graph.in_degrees() == 0).any():
+        ^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/dgl/heterograph.py", line 3668, in in_degrees
+    dsttype = self.to_canonical_etype(etype)[2]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/dgl/heterograph.py", line 1279, in to_canonical_etype
+    raise DGLError(
+dgl._ffi.base.DGLError: Edge type name must be specified if there are more than one edge types.
