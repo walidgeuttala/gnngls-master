@@ -1,0 +1,8 @@
+device = cuda
+5
+[0, 45, 6, 35, 30, 29, 31, 22, 25, 19, 13, 32, 39, 52, 58, 48, 20, 3, 53, 17, 40, 2, 50, 61, 34, 1, 4, 23, 60, 12, 14, 16, 51, 27, 63, 10, 44, 15, 26, 47, 54, 7, 56, 37, 8, 24, 57, 21, 55, 43, 59, 33, 41, 49, 46, 9, 5, 11, 18, 42, 28, 38, 62, 36, 0]
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/test.py", line 179, in <module>
+    best_tour, best_cost, search_progress_i = algorithms.guided_local_search(G, init_tour, init_cost,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: too many values to unpack (expected 3)

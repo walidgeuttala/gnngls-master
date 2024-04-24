@@ -103,22 +103,22 @@ def directed_string_graph(G1):
         print(G2.adj(etype=etype))
     return G2
 
-# complete_graph = nx.complete_graph(4).to_directed()
-# print(complete_graph.edges())
-# g = directed_string_graph(complete_graph)
-# print(g.num_nodes())
-# print(g.num_edges())
-# values = torch.tensor([(1, 2), (2, 3)])
-# g.ndata['e'] = values
-# print(g.ndata['e'])
+complete_graph = nx.complete_graph(4).to_directed()
+print(complete_graph.edges())
+g = directed_string_graph(complete_graph)
+print(g.num_nodes())
+print(g.num_edges())
+values = torch.tensor([(1, 2), (2, 3)])
+g.ndata['e'] = values
+print(g.ndata['e'])
 
 
-import torch
+# import torch
 
-# Example list of tensors
-tensor_list = [torch.randn(3, 2), torch.randn(3, 2), torch.randn(3, 2)]
+# # Example list of tensors
+# tensor_list = [torch.randn(3, 2), torch.randn(3, 2), torch.randn(3, 2)]
 
-# Concatenate tensors along the specified dimension (dimension 0 in this case)
-concatenated_tensor = torch.cat(tensor_list, dim=0)
+# # Concatenate tensors along the specified dimension (dimension 0 in this case)
+# concatenated_tensor = torch.cat(tensor_list, dim=0)
 
-print(concatenated_tensor)
+# print(concatenated_tensor)

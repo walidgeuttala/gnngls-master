@@ -38,19 +38,15 @@ if __name__ == '__main__':
     args = parser.parse_args()
     args.output_path.mkdir(parents=True, exist_ok=True)
     params = json.load(open(args.model_path.parent / 'params.json'))
-    if 'efeat_drop_idx' in params:
-        test_set = datasets.TSPDataset(args.data_path, feat_drop_idx=params['efeat_drop_idx'])
-    else:
-        test_set = datasets.TSPDataset(args.data_path)
+    test_set = datasets.TSPDataset(args.data_path)
 
     if 'regret_pred' in args.guides:
         device = torch.device('cuda' if args.use_gpu and torch.cuda.is_available() else 'cpu')
         print('device =', device)
 
-        _, feat_dim = test_set[0].ndata['features'].shape
 
         model = models.EdgePropertyPredictionModel(
-            feat_dim,
+            1,
             params['embed_dim'],
             1,
             params['n_layers'],

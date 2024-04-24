@@ -1,0 +1,8 @@
+device = cuda
+  0%|          | 0/20 [00:00<?, ?it/s]  0%|          | 0/20 [00:10<?, ?it/s]
+5
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/test.py", line 207, in <module>
+    'correlation ': f'{correlation_matrix(y_pred.cpu(), H.y.cpu())}'
+                                                        ^^^
+AttributeError: 'DGLGraph' object has no attribute 'y'

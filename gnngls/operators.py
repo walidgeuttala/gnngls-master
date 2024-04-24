@@ -1,5 +1,4 @@
 import itertools
-
 import numpy as np
 
 
@@ -26,9 +25,6 @@ def two_opt_cost(tour, D, i, j):
             + D[b, d] \
             - D[a, b] \
             - D[c, d]
-    # for i to j-1     ans1
-    # for j-1 to i     ans2
-    # delta += (ans2 - ans1)
     return delta
 
 
@@ -102,8 +98,6 @@ def relocate_cost(tour, D, i, j):
             - D[d, e] \
             + D[d, b] \
             + D[b, e]
-
-    # 
     return delta
 
 

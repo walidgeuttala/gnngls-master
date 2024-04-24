@@ -147,6 +147,8 @@ def parse_args():
     parser.add_argument('--target', type=str, default='regret', choices=['regret', 'in_solution'])
     parser.add_argument('--kj', type=str, default='cat', choices=['cat', 'max'])
     parser.add_argument('--use_gpu', action='store_true')
+    parser.add_argument('--tsp', action='store_true')
+    
     args = parser.parse_args()
 
     return args
@@ -233,7 +235,8 @@ def run(args):
             es = H.ndata['e']['node1'].cpu().numpy()
             for e, regret_pred_i in zip(es, regret_pred):
                 G.edges[e]['regret_pred'] = np.maximum(regret_pred_i.item(), 0)
-            G = tsp_to_atsp_instance(G)
+            # if args.tsp:
+            #     G = tsp_to_atsp_instance(G)
             opt_cost = gnngls.optimal_cost(G, weight='weight')
             init_tour = algorithms.nearest_neighbor(G, 0, weight='regret_pred')
             init_cost = gnngls.tour_cost(G, init_tour)
@@ -302,11 +305,11 @@ def parse_args():
     return args
 def main():
     search_space = {
-        "embed_dim": [128],
+        "embed_dim": [128, 256],
         "embd_dim2": [128*2],
-        "n_layers": [4],
+        "n_layers": [3, 5],
         "lr_init": [1e-3],
-        "n_heads": [16],
+        "n_heads": [32, 64],
         "kj": ['cat'],
     }
 

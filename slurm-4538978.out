@@ -1,0 +1,10 @@
+device = cuda
+  0%|          | 0/20 [00:00<?, ?it/s]5
+best_cost 1497916.0 opt_cost 1374716.0
+Avg Gap: 8.9619
+  0%|          | 0/20 [00:10<?, ?it/s]
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/test.py", line 175, in <module>
+    print(corr_all/cnt)
+          ~~~~~~~~^~~~
+ZeroDivisionError: float division by zero

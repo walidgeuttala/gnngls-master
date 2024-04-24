@@ -1,0 +1,6 @@
+device = cuda
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/test.py", line 92, in <module>
+    _, feat_dim = 1
+    ^^^^^^^^^^^
+TypeError: cannot unpack non-iterable int object
