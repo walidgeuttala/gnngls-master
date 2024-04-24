@@ -44,7 +44,7 @@ def train(model, train_loader, target, criterion, optimizer, device):
     for batch_i, batch in enumerate(train_loader):
         batch = batch.to(device)
         x = batch.ndata['weight']
-        y = batch.ndata[target]
+        y = batch.ndata[target]['node1']
 
         optimizer.zero_grad()
         y_pred = model(batch, x)
@@ -66,7 +66,7 @@ def test(model, data_loader, target, criterion, device):
         for batch_i, batch in enumerate(data_loader):
             batch = batch.to(device)
             x = batch.ndata['weight']
-            y = batch.ndata[target]
+            y = batch.ndata[target]['node1']
 
             y_pred = model(batch, x)
             loss = criterion(y_pred, y.type_as(y_pred))
@@ -162,7 +162,7 @@ def run(args):
     device = torch.device('cuda' if args.use_gpu and torch.cuda.is_available() else 'cpu')
     print('device =', device)
 
-    _, feat_dim = train_set[0].ndata['weight'].shape
+    feat_dim = 1
     set_random_seed(1234)
     # model = models.EdgePropertyPredictionModel(
     #     feat_dim,
@@ -177,7 +177,9 @@ def run(args):
         feat_dim,
         args.embed_dim,
         1,
-        train_set.etypes
+        train_set.etypes,
+        args.n_layers,
+        args.n_heads
     ).to(device)
 
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr_init)
@@ -228,15 +230,15 @@ def run(args):
                 y_pred = model(H, x)
             
             regret_pred = val_set.scalers['regret'].inverse_transform(y_pred.cpu().numpy())
-            es = H.ndata['e'].cpu().numpy()
+            es = H.ndata['e']['node1'].cpu().numpy()
             for e, regret_pred_i in zip(es, regret_pred):
                 G.edges[e]['regret_pred'] = np.maximum(regret_pred_i.item(), 0)
             G = tsp_to_atsp_instance(G)
             opt_cost = gnngls.optimal_cost(G, weight='weight')
             init_tour = algorithms.nearest_neighbor(G, 0, weight='regret_pred')
             init_cost = gnngls.tour_cost(G, init_tour)
-            average_corr1 += correlation_matrix(y_pred.cpu(),H.ndata['regret'].cpu())
-            average_corr2 += cosine_similarity(y_pred.cpu().flatten(),H.ndata['regret'].cpu().flatten())
+            average_corr1 += correlation_matrix(y_pred.cpu(),H.ndata['regret']['node1'].cpu())
+            average_corr2 += cosine_similarity(y_pred.cpu().flatten(),H.ndata['regret']['node1'].cpu().flatten())
             average_gap += (init_cost / opt_cost - 1) * 100
 
         min_epoch_val_loss = min(min_epoch_val_loss, epoch_val_loss)
@@ -301,7 +303,7 @@ def parse_args():
 def main():
     search_space = {
         "embed_dim": [128],
-        "embd_dim2": [128],
+        "embd_dim2": [128*2],
         "n_layers": [4],
         "lr_init": [1e-3],
         "n_heads": [16],

@@ -176,11 +176,18 @@ class TSPDataset(torch.utils.data.Dataset):
         regret = np.vstack(regret)
         regret_transformed = self.scalers['regret'].transform(regret)
         in_solution = np.vstack(in_solution)
+        weight_dict = dict()
+        regret_dict = dict()
+        in_solution_dict = dict()
+        for idx in range(5):
+            weight_dict[f'node{idx+1}'] = torch.tensor(features_transformed, dtype=torch.float32).clone()
+            regret_dict[f'node{idx+1}'] = torch.tensor(regret_transformed, dtype=torch.float32).clone()
+            in_solution_dict[f'node{idx+1}'] = torch.tensor(in_solution, dtype=torch.float32).clone()
 
         H = copy.deepcopy(self.G)
-        H.ndata['weight'] = torch.tensor(features_transformed, dtype=torch.float32)
-        H.ndata['regret'] = torch.tensor(regret_transformed, dtype=torch.float32)
-        H.ndata['in_solution'] = torch.tensor(in_solution, dtype=torch.float32)
+        H.ndata['weight'] = weight_dict
+        H.ndata['regret'] = regret_dict
+        H.ndata['in_solution'] = in_solution_dict
         H.ndata['e'] = self.G.ndata['e']
         return H
 

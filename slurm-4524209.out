@@ -1,0 +1,11 @@
+device = cuda
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 328, in <module>
+    main()
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 321, in main
+    val_loss = run(args)
+               ^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 165, in run
+    _, feat_dim = train_set[0].ndata['weight'].shape
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'shape'
