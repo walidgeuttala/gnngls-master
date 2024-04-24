@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 322, in <module>
+    main()
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 315, in main
+    val_loss = run(args)
+               ^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 158, in run
+    train_set = datasets.TSPDataset(args.data_dir / 'train.txt')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/gnngls/datasets.py", line 168, in __init__
+    directed_string_graph(G)
+  File "/project/p_gnn001/code/tsp/tsp/gnngls/datasets.py", line 64, in directed_string_graph
+    G2 = dgl.graph()
+         ^^^^^^^^^^^
+TypeError: graph() missing 1 required positional argument: 'data'
