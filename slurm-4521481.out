@@ -1,0 +1,17 @@
+device = cuda
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 322, in <module>
+    main()
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 315, in main
+    val_loss = run(args)
+               ^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 165, in run
+    _, feat_dim = train_set[0].ndata['weight'].shape
+                  ~~~~~~~~~^^^
+  File "/project/p_gnn001/code/tsp/tsp/gnngls/datasets.py", line 97, in __getitem__
+    H = self.get_scaled_features(G)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/gnngls/datasets.py", line 119, in get_scaled_features
+    H.ndata['regret'] = torch.nn.functional.softmax(tensor, dim=1)
+                                                    ^^^^^^
+NameError: name 'tensor' is not defined

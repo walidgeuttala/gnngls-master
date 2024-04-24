@@ -48,7 +48,7 @@ def train(model, train_loader, target, criterion, optimizer, device):
 
         optimizer.zero_grad()
         y_pred = model(batch, x)
-        loss = criterion(y_pred, y.type_as(y_pred))
+        loss = criterion(y_pred, y)
         loss.backward()
         optimizer.step()
 
@@ -186,9 +186,9 @@ def run(args):
         pos_weight = len(y) / y.sum() - 1
         criterion = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight)
 
-    train_loader = DataLoader(train_set, batch_size=args.batch_size, shuffle=True, collate_fn=dgl.batch,
+    train_loader = DataLoader(train_set, batch_size=args.batch_size, shuffle=False, collate_fn=dgl.batch,
                               num_workers=16, pin_memory=True)
-    val_loader = DataLoader(val_set, batch_size=args.batch_size, shuffle=True, collate_fn=dgl.batch,
+    val_loader = DataLoader(val_set, batch_size=args.batch_size, shuffle=False, collate_fn=dgl.batch,
                             num_workers=16, pin_memory=True)
 
     timestamp = datetime.datetime.now().strftime('%b%d_%H-%M-%S')
@@ -281,7 +281,7 @@ def parse_args():
     parser.add_argument('--n_layers', type=int, default=3, help='Number of message passing steps')
     parser.add_argument('--n_heads', type=int, default=8, help='Number of attention heads for GAT')
     parser.add_argument('--lr_init', type=float, default=1e-3, help='Initial learning rate')
-    parser.add_argument('--lr_decay', type=float, default=0.99, help='Learning rate decay')
+    parser.add_argument('--lr_decay', type=float, default=0.90, help='Learning rate decay')
     parser.add_argument('--min_delta', type=float, default=1e-4, help='Early stopping min delta')
     parser.add_argument('--patience', type=int, default=5, help='Early stopping patience')
     parser.add_argument('--batch_size', type=int, default=15, help='Batch size')
@@ -294,11 +294,11 @@ def parse_args():
     return args
 def main():
     search_space = {
-        "embed_dim": [256, 128],
-        "embd_dim2": [256, 128],
+        "embed_dim": [128],
+        "embd_dim2": [128*2],
         "n_layers": [4],
         "lr_init": [1e-3],
-        "n_heads": [32],
+        "n_heads": [16],
         "kj": ['cat']
     }
 

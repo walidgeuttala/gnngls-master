@@ -1,0 +1,15 @@
+device = cuda
+  0%|          | 0/10 [00:00<?, ?it/s]  0%|          | 0/10 [00:04<?, ?it/s]
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 322, in <module>
+    main()
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 315, in main
+    val_loss = run(args)
+               ^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 207, in run
+    epoch_loss = train(model, train_loader, args.target, criterion, optimizer, device)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 47, in train
+    y = batch.ndata[target].view(63, y.shape[0]//63)
+                                     ^
+UnboundLocalError: cannot access local variable 'y' where it is not associated with a value

@@ -1,0 +1,242 @@
+device = cuda
+  0%|          | 0/10 [00:00<?, ?it/s]/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+  0%|          | 0/10 [01:01<?, ?it/s, Train Loss=0.0138, Validation Loss=0.0025, correlation : =0.8634, cosin correlation : =0.9823, gap : =15.3227] 10%|█         | 1/10 [01:01<09:15, 61.77s/it, Train Loss=0.0138, Validation Loss=0.0025, correlation : =0.8634, cosin correlation : =0.9823, gap : =15.3227]/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+ 10%|█         | 1/10 [01:59<09:15, 61.77s/it, Train Loss=0.0019, Validation Loss=0.0020, correlation : =0.8781, cosin correlation : =0.9836, gap : =16.0022] 20%|██        | 2/10 [01:59<07:54, 59.37s/it, Train Loss=0.0019, Validation Loss=0.0020, correlation : =0.8781, cosin correlation : =0.9836, gap : =16.0022]/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+ 20%|██        | 2/10 [02:58<07:54, 59.37s/it, Train Loss=0.0018, Validation Loss=0.0026, correlation : =0.8839, cosin correlation : =0.9840, gap : =17.4414] 30%|███       | 3/10 [02:58<06:53, 59.03s/it, Train Loss=0.0018, Validation Loss=0.0026, correlation : =0.8839, cosin correlation : =0.9840, gap : =17.4414]/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+ 30%|███       | 3/10 [03:56<06:53, 59.03s/it, Train Loss=0.0016, Validation Loss=0.0016, correlation : =0.9034, cosin correlation : =0.9870, gap : =13.6117] 40%|████      | 4/10 [03:56<05:52, 58.73s/it, Train Loss=0.0016, Validation Loss=0.0016, correlation : =0.9034, cosin correlation : =0.9870, gap : =13.6117]/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+ 40%|████      | 4/10 [04:54<05:52, 58.73s/it, Train Loss=0.0015, Validation Loss=0.0015, correlation : =0.9088, cosin correlation : =0.9880, gap : =13.4510] 50%|█████     | 5/10 [04:54<04:52, 58.60s/it, Train Loss=0.0015, Validation Loss=0.0015, correlation : =0.9088, cosin correlation : =0.9880, gap : =13.4510]/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+/project/p_gnn001/code/tsp/tsp/train.py:122: FutureWarning: attr_matrix will return an numpy.ndarray instead of a numpy.matrix in NetworkX 3.0.
+  attribute, _ = nx.attr_matrix(G1, attribute_name)
+ 50%|█████     | 5/10 [05:53<04:52, 58.60s/it, Train Loss=0.0015, Validation Loss=0.0015, correlation : =0.9111, cosin correlation : =0.9882, gap : =13.9219] 60%|██████    | 6/10 [05:53<03:54, 58.67s/it, Train Loss=0.0015, Validation Loss=0.0015, correlation : =0.9111, cosin correlation : =0.9882, gap : =13.9219]slurmstepd: error: *** JOB 4482791 ON x1001c1s1b0n1 CANCELLED AT 2024-04-21T18:32:50 ***

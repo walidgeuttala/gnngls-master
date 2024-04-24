@@ -86,6 +86,8 @@ class TSPDataset(torch.utils.data.Dataset):
         self.G = dgl.from_networkx(lG, node_attrs=['e'])
         
 
+    
+
     def __len__(self):
         return len(self.instances)
 
@@ -117,5 +119,7 @@ class TSPDataset(torch.utils.data.Dataset):
         H = copy.deepcopy(self.G)
         H.ndata['weight'] = torch.tensor(features_transformed, dtype=torch.float32)
         H.ndata['regret'] = torch.tensor(regret_transformed, dtype=torch.float32)
+        H.ndata['regret'] = torch.nn.functional.softmax(H.ndata['regret'], dim=1)
+
         H.ndata['in_solution'] = torch.tensor(regret, dtype=torch.float32)
         return H

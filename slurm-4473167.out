@@ -1,10 +1,0 @@
-device = cuda
-  0%|          | 0/100 [00:00<?, ?it/s]  0%|          | 0/100 [01:55<?, ?it/s]
-Traceback (most recent call last):
-  File "/project/p_gnn001/code/tsp/tsp/train.py", line 189, in <module>
-    "cosin correlation : ": '{:.4f}'.format(cosine_similarity(y_pred.cpu(),H.ndata['regret'].cpu()))
-                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/project/p_gnn001/code/tsp/tsp/train.py", line 97, in cosine_similarity
-    dot_product = np.dot(A, B)
-                  ^^^^^^^^^^^^
-ValueError: shapes (4032,1) and (4032,1) not aligned: 1 (dim 1) != 4032 (dim 0)

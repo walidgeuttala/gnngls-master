@@ -18,7 +18,7 @@ import itertools
 from torch.utils.tensorboard import SummaryWriter
 import networkx as nx
 import gnngls
-from gnngls import models, datasets, algorithms
+from gnngls import models2, datasets, algorithms
 import torch.nn.functional as F
 # Suppress FutureWarnings
 import warnings
@@ -164,7 +164,7 @@ def run(args):
 
     _, feat_dim = train_set[0].ndata['weight'].shape
     set_random_seed(1234)
-    model = models.EdgePropertyPredictionModel(
+    model = models2.EdgePropertyPredictionModel(
         feat_dim,
         args.embed_dim,
         1,
@@ -272,34 +272,15 @@ def run(args):
     save(model, optimizer, epoch, epoch_loss, epoch_val_loss, log_dir / 'checkpoint_final.pt')
     return min_epoch_val_loss
 
-def parse_args():
-    parser = argparse.ArgumentParser(description='Train model')
-    parser.add_argument('data_dir', type=pathlib.Path, help='Where to load dataset')
-    parser.add_argument('tb_dir', type=pathlib.Path, help='Where to log Tensorboard data')
-    parser.add_argument('--embed_dim', type=int, default=128, help='Maximum hidden feature dimension')
-    parser.add_argument('--embed_dim2', type=int, default=128, help='Maximum hidden feature dimension')
-    parser.add_argument('--n_layers', type=int, default=3, help='Number of message passing steps')
-    parser.add_argument('--n_heads', type=int, default=8, help='Number of attention heads for GAT')
-    parser.add_argument('--lr_init', type=float, default=1e-3, help='Initial learning rate')
-    parser.add_argument('--lr_decay', type=float, default=0.99, help='Learning rate decay')
-    parser.add_argument('--min_delta', type=float, default=1e-4, help='Early stopping min delta')
-    parser.add_argument('--patience', type=int, default=5, help='Early stopping patience')
-    parser.add_argument('--batch_size', type=int, default=15, help='Batch size')
-    parser.add_argument('--n_epochs', type=int, default=10, help='Number of epochs')
-    parser.add_argument('--checkpoint_freq', type=int, default=1, help='Checkpoint frequency')
-    parser.add_argument('--target', type=str, default='regret', choices=['regret', 'in_solution'])
-    parser.add_argument('--use_gpu', action='store_true')
-    args = parser.parse_args()
 
-    return args
 def main():
     search_space = {
-        "embed_dim": [256, 128],
-        "embd_dim2": [256, 128],
-        "n_layers": [4],
-        "lr_init": [1e-3],
-        "n_heads": [32],
-        "kj": ['cat']
+        "embed_dim": [128, 64,32],
+        "embed_dim2": [128, 64],
+        "n_layers": [4, 3, 2, 1],
+        "lr_init": [1e-3, 1e-4],
+        "n_heads": [16, 8, 4],
+        "kj": ['cat', 'max']
     }
 
     args = parse_args()

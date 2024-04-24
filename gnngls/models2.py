@@ -1,7 +1,6 @@
 import dgl.nn
 import torch.nn as nn
 import dgl
-import torch
 
 class SkipConnection(nn.Module):
     def __init__(self, module):
@@ -35,24 +34,23 @@ class AttentionLayer(nn.Module):
     def __init__(self, embed_dim, n_heads, hidden_dim):
         super().__init__()
 
-        self.message_passing = SkipConnection(
-            dgl.nn.GATConv(embed_dim, embed_dim // n_heads, n_heads)
-        )
+        self.message_passing = dgl.nn.GATConv(embed_dim, embed_dim, n_heads)
+        
 
         self.feed_forward = nn.Sequential(
-            nn.BatchNorm1d(embed_dim),
-            SkipConnection(
+            nn.BatchNorm1d(embed_dim*n_heads),
+            
                 nn.Sequential(
-                    nn.Linear(embed_dim, hidden_dim),
+                    nn.Linear(embed_dim*n_heads, hidden_dim),
                     nn.ReLU(),
                     nn.Linear(hidden_dim, embed_dim)
                 ),
-            ),
+            
             nn.BatchNorm1d(embed_dim),
         )
         
     def forward(self, G, x):
-        h = self.message_passing(x, G=G).view(G.number_of_nodes(), -1)
+        h = self.message_passing(G, x).flatten(1)
         h = self.feed_forward(h)
         return h
 
@@ -82,7 +80,6 @@ class EdgePropertyPredictionModel(nn.Module):
             self.decision_layer = MLP(embed_dim*(n_layers+1), embed_dim, out_dim)
         else:
             self.decision_layer = MLP(embed_dim, embed_dim, out_dim)
-        
     def forward(self, G, x):
         h = self.embed_layer(x)
         xs = []

@@ -31,31 +31,17 @@ def add_diag(t1):
     return t2
 
 def correlation_matrix(tensor1, tensor2):
-    """
-    Computes the correlation matrix between two tensors.
     
-    Args:
-    - tensor1 (torch.Tensor): The first input tensor.
-    - tensor2 (torch.Tensor): The second input tensor.
-    
-    Returns:
-    - corr_matrix (np.ndarray): The correlation matrix.
-    """
     # Flatten tensors into 1D arrays
     flat_tensor1 = tensor1.flatten().numpy()
     flat_tensor2 = tensor2.flatten().numpy()
 
     # Concatenate flattened tensors along the second axis
-    concatenated_tensors = np.stack((flat_tensor1, flat_tensor2), axis=1)
 
     # Compute the correlation matrix
-    corr_matrix = np.corrcoef(concatenated_tensors, rowvar=False)
+    corr_matrix = np.corrcoef(flat_tensor1, flat_tensor2)[0, 1]
     
-    abs_correlation_matrix = np.abs(corr_matrix)
-    
-    # Compute the mean of the absolute correlation coefficients
-    strength = np.mean(abs_correlation_matrix)
-    return strength
+    return corr_matrix
 
 def cosine_similarity(A, B):
     dot_product = np.dot(A, B)
@@ -63,6 +49,24 @@ def cosine_similarity(A, B):
     norm_B = np.linalg.norm(B)
     similarity = dot_product / (norm_A * norm_B)
     return similarity
+def tsp_to_atsp_instance(G1):
+    num_nodes = G1.number_of_nodes() // 2
+    G2 = nx.DiGraph()
+    G2.add_nodes_from(range(num_nodes))
+    G2.add_edges_from([(u, v) for u in range(num_nodes) for v in range(num_nodes) if u != v])
+
+    first_edge = list(G1.edges)[0]
+
+    # Get the attribute names of the first edge
+    attribute_names = G1[first_edge[0]][first_edge[1]].keys()
+    attribute_names_list = list(attribute_names)
+    for attribute_name in attribute_names_list:
+        attribute, _ = nx.attr_matrix(G1, attribute_name)
+        attribute = attribute[num_nodes:, :num_nodes]
+        for u, v in G2.edges():
+            G2[u][v][attribute_name] = attribute[u, v]
+    
+    return G2
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Test model')
@@ -104,6 +108,7 @@ if __name__ == '__main__':
     gaps = []
     search_progress = []
     cnt = 0
+    corr_all = 0.
     for instance in test_set.instances:
         G = nx.read_gpickle(test_set.root_dir / instance)
 
@@ -118,30 +123,29 @@ if __name__ == '__main__':
 
         if 'regret_pred' in args.guides:
             H = test_set.get_scaled_features(G).to(device)
-
             x = H.ndata['weight']
             y = H.ndata['regret']
             with torch.no_grad():
                 y_pred = model(H, x)
             regret_pred = test_set.scalers['regret'].inverse_transform(y_pred.cpu().numpy())
-            print(y_pred.shape)
             es = H.ndata['e'].cpu().numpy()
             for e, regret_pred_i in zip(es, regret_pred):
                 G.edges[e]['regret_pred'] = np.maximum(regret_pred_i.item(), 0)
-
+            G = tsp_to_atsp_instance(G)
             init_tour = algorithms.nearest_neighbor(G, 0, weight='regret_pred')
-            
+        
         init_cost = gnngls.tour_cost(G, init_tour)
 
 
 
-
-
+        edge_weight, _ = nx.attr_matrix(G, 'weight')
+        corr = correlation_matrix(y_pred.cpu(),H.ndata['regret'].cpu())
+        corr_all += corr
 
         with open(args.output_path / f"instance{cnt}.txt", "w") as f:
             # Save array1
             f.write("edge_weight:\n")
-            np.savetxt(f, add_diag(H.ndata['weight'].cpu()).numpy(), fmt="%.8f", delimiter=" ")
+            np.savetxt(f, edge_weight, fmt="%.8f", delimiter=" ")
             f.write("\n")
 
             # Save array2
@@ -156,7 +160,7 @@ if __name__ == '__main__':
 
             f.write(f"opt_cost: {opt_cost}\n")
             f.write(f"init_cost: {init_cost}\n")
-            f.write(f"correlation: {correlation_matrix(y_pred.cpu(),H.ndata['regret'].cpu())}\n")
+            f.write(f"correlation: {corr}\n")
             
 
         cnt += 1
@@ -189,17 +193,17 @@ if __name__ == '__main__':
         # print(f'best_cost {best_cost} opt_cost {opt_cost}', flush=True)
         # print('Avg Gap: {:.4f}'.format(np.mean(gaps)), flush=True)
 
-        
+        print(corr_all/cnt)
         
 
-    search_progress_df = pd.DataFrame.from_records(search_progress)
-    search_progress_df['best_cost'] = search_progress_df.groupby('instance')['cost'].cummin()
-    search_progress_df['gap'] = (search_progress_df['best_cost'] / search_progress_df['opt_cost'] - 1) * 100
-    search_progress_df['dt'] = search_progress_df['time'] - search_progress_df.groupby('instance')['time'].transform(
-        'min')
+    # search_progress_df = pd.DataFrame.from_records(search_progress)
+    # search_progress_df['best_cost'] = search_progress_df.groupby('instance')['cost'].cummin()
+    # search_progress_df['gap'] = (search_progress_df['best_cost'] / search_progress_df['opt_cost'] - 1) * 100
+    # search_progress_df['dt'] = search_progress_df['time'] - search_progress_df.groupby('instance')['time'].transform(
+    #     'min')
 
-    timestamp = datetime.datetime.now().strftime('%b%d_%H-%M-%S')
-    run_name = f'{timestamp}_{uuid.uuid4().hex}.pkl'
-    if not args.run_dir.exists():
-        args.run_dir.mkdir()
-    search_progress_df.to_pickle(args.run_dir / run_name)
+    # timestamp = datetime.datetime.now().strftime('%b%d_%H-%M-%S')
+    # run_name = f'{timestamp}_{uuid.uuid4().hex}.pkl'
+    # if not args.run_dir.exists():
+    #     args.run_dir.mkdir()
+    # search_progress_df.to_pickle(args.run_dir / run_name)
