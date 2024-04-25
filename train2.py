@@ -12,13 +12,13 @@ import numpy as np
 import dgl.nn
 import torch
 import tqdm.auto as tqdm
-from torch.utils.data import DataLoader
+from dgl.dataloading import GraphDataLoader
 import itertools
 
 from torch.utils.tensorboard import SummaryWriter
 import networkx as nx
 import gnngls
-from gnngls import models, datasets, algorithms
+from gnngls import models2, datasets, algorithms
 import torch.nn.functional as F
 # Suppress FutureWarnings
 import warnings
@@ -147,6 +147,8 @@ def parse_args():
     parser.add_argument('--target', type=str, default='regret', choices=['regret', 'in_solution'])
     parser.add_argument('--kj', type=str, default='cat', choices=['cat', 'max'])
     parser.add_argument('--use_gpu', action='store_true')
+    parser.add_argument('--tsp', action='store_true')
+    
     args = parser.parse_args()
 
     return args
@@ -162,9 +164,9 @@ def run(args):
     device = torch.device('cuda' if args.use_gpu and torch.cuda.is_available() else 'cpu')
     print('device =', device)
 
-    _, feat_dim = train_set[0].ndata['weight'].shape
+    feat_dim = 1
     set_random_seed(1234)
-    model = models.EdgePropertyPredictionModel(
+    model = models2.EdgePropertyPredictionModel(
         feat_dim,
         args.embed_dim,
         1,
@@ -186,9 +188,9 @@ def run(args):
         pos_weight = len(y) / y.sum() - 1
         criterion = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight)
 
-    train_loader = DataLoader(train_set, batch_size=args.batch_size, shuffle=False, collate_fn=dgl.batch,
+    train_loader = GraphDataLoader(train_set, batch_size=args.batch_size, shuffle=False,
                               num_workers=16, pin_memory=True)
-    val_loader = DataLoader(val_set, batch_size=args.batch_size, shuffle=False, collate_fn=dgl.batch,
+    val_loader = GraphDataLoader(val_set, batch_size=args.batch_size, shuffle=False,
                             num_workers=16, pin_memory=True)
 
     timestamp = datetime.datetime.now().strftime('%b%d_%H-%M-%S')
@@ -225,6 +227,7 @@ def run(args):
             es = H.ndata['e'].cpu().numpy()
             for e, regret_pred_i in zip(es, regret_pred):
                 G.edges[e]['regret_pred'] = np.maximum(regret_pred_i.item(), 0)
+            
             G = tsp_to_atsp_instance(G)
             opt_cost = gnngls.optimal_cost(G, weight='weight')
             init_tour = algorithms.nearest_neighbor(G, 0, weight='regret_pred')
@@ -295,11 +298,11 @@ def parse_args():
 def main():
     search_space = {
         "embed_dim": [128],
-        "embd_dim2": [128*2],
+        "embd_dim2": [128],
         "n_layers": [4],
         "lr_init": [1e-3],
         "n_heads": [16],
-        "kj": ['cat']
+        "kj": ['cat'],
     }
 
     args = parse_args()
