@@ -1,0 +1,15 @@
+device = cuda
+  0%|          | 0/20 [00:00<?, ?it/s]  0%|          | 0/20 [00:11<?, ?it/s, Avg Gap init:=674.1233, Avg Gap best:=-100.0000, Avg corr normal =-54.7525, Avg cosine normal =93.1652, Avg counts =124.0000]  5%|▌         | 1/20 [00:11<03:31, 11.13s/it, Avg Gap init:=674.1233, Avg Gap best:=-100.0000, Avg corr normal =-54.7525, Avg cosine normal =93.1652, Avg counts =124.0000]  5%|▌         | 1/20 [00:12<04:02, 12.76s/it, Avg Gap init:=674.1233, Avg Gap best:=-100.0000, Avg corr normal =-54.7525, Avg cosine normal =93.1652, Avg counts =124.0000]
+[0, 64, 71, 91, 85, 95, 73, 127, 107, 96, 122, 92, 28, 20, 44, 6, 55, 119, 116, 80, 16, 52, 41, 105, 78, 84, 117, 109, 124, 74, 121, 57, 15, 38, 102, 112, 48, 51, 45, 43, 56, 23, 9, 10, 61, 21, 30, 27, 8, 37, 58, 50, 32, 13, 17, 36, 42, 106, 97, 76, 90, 94, 115, 72, 113, 114, 101, 70, 87, 68, 123, 120, 69, 5, 39, 25, 49, 60, 40, 18, 82, 104, 86, 88, 67, 108, 81, 103, 118, 79, 89, 110, 98, 125, 99, 77, 65, 1, 31, 12, 46, 54, 22, 3, 29, 35, 4, 33, 24, 59, 34, 47, 111, 100, 93, 75, 11, 2, 26, 53, 62, 126, 66, 83, 19, 14, 7, 63, 0]
+[0, 7, 6, 29, 21, 54, 44, 18, 49, 11, 47, 111, 99, 90, 112, 86, 22, 20, 2, 53, 24, 56, 120, 97, 113, 117, 74, 10, 48, 15, 17, 63, 40, 52, 45, 32, 12, 76, 77, 68, 4, 62, 19, 16, 9, 46, 50, 61, 125, 84, 88, 110, 79, 114, 89, 25, 35, 57, 121, 83, 93, 126, 80, 107, 66, 82, 104, 109, 67, 3, 30, 60, 36, 58, 122, 72, 116, 118, 100, 106, 42, 8, 28, 92, 119, 105, 70, 124, 71, 123, 59, 14, 78, 75, 65, 1, 33, 26, 31, 95, 64, 102, 38, 51, 115, 96, 94, 73, 87, 127, 98, 91, 85, 101, 81, 108, 103, 69, 5, 43, 37, 39, 41, 27, 55, 34, 13, 23, 0]
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/test.py", line 162, in <module>
+    best_tour, best_cost, search_progress_i, cnt_ans = algorithms.guided_local_search(G, init_tour, init_cost,
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/gnngls/algorithms.py", line 164, in guided_local_search
+    util = G.edges[e][guide] / (1 + G.edges[e]['penalty'])
+           ~~~~~~~^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/networkx/classes/reportviews.py", line 1094, in __getitem__
+    return self._adjdict[u][v]
+           ~~~~~~~~~~~~~~~~^^^
+KeyError: 7

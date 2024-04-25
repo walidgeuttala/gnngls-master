@@ -294,8 +294,8 @@ def parse_args():
     return args
 def main():
     search_space = {
-        "embed_dim": [256, 128],
-        "embd_dim2": [256, 128],
+        "embed_dim": [128],
+        "embd_dim2": [256],
         "n_layers": [4],
         "lr_init": [1e-3],
         "n_heads": [32],
