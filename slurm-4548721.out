@@ -1,0 +1,11 @@
+device = cuda
+  0%|          | 0/100 [00:00<?, ?it/s]  0%|          | 0/100 [00:10<?, ?it/s]
+5
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/test.py", line 204, in <module>
+    avg_corr_cosine.append(cosine_similarity(y_pred.cpu(), H.ndata['regret']['node1'].cpu()))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/test.py", line 50, in cosine_similarity
+    dot_product = np.dot(A, B)
+                  ^^^^^^^^^^^^
+ValueError: shapes (4032,1) and (4032,1) not aligned: 1 (dim 1) != 4032 (dim 0)

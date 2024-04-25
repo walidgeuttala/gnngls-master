@@ -113,6 +113,9 @@ if __name__ == '__main__':
     cnt = 0
     gaps = []
     search_progress = []
+    avg_corr_cosine=[]
+    avg_corr_normal=[]
+    avg_cnt_ans = []
     cnt = 0
     corr_all = 0.
     for instance in pbar:
@@ -197,14 +200,16 @@ if __name__ == '__main__':
         
         init_gaps.append(init_gap)
         final_gaps.append(final_gap)
-        
-        pbar.set_postfix({
+        avg_corr_normal.append(correlation_matrix(y_pred.cpu(), H.ndata['regret']['node1'].cpu()))
+        avg_corr_cosine.append(cosine_similarity(y_pred.cpu().view(-1), H.ndata['regret']['node1'].cpu().view(-1)))
+        avg_cnt_ans.append(cnt_ans)
+
+        pbar.set_postfix({ 
                 'Avg Gap init:': '{:.4f}'.format(np.mean(init_gaps)),
                 'Avg Gap best:': '{:.4f}'.format(np.mean(final_gaps)),
-                'optimal': f'{opt_cost}',
-                'init': f'{init_cost}',
-                'best': f'{best_cost}',
-                'correlation ': f'{correlation_matrix(y_pred.cpu(), H.ndata['regret']['node1'].cpu())}'
+                'Avg corr normal ': '{:.4f}'.format(np.mean(avg_corr_normal)*100),
+                'Avg cosine normal ': '{:.4f}'.format(np.mean(avg_corr_cosine)*100),
+                'Avg counts ': '{:.4f}'.format(np.mean(avg_cnt_ans)),
             })
 
     search_progress_df = pd.DataFrame.from_records(search_progress)
