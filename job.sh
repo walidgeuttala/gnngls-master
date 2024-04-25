@@ -18,8 +18,8 @@
 #python train.py ../generated ../model_result --use_gpu
 #python test_me.py
 #python preprocess_dataset2.py ../generatedn2000
-#python train2.py ../tsp_n5900 ../model_result_n5900 --use_gpu
-python test.py ../tsp_n5900/test3.txt ../model_result_n5900/Apr25_08-43-22_35dfcd62f8324eb48ed9bd417b36166c/checkpoint_best_val.pt ../run_result_n5900 regret_pred ../test_model4 --use_gpu
+python train2.py ../tsp_n5900 ../model_result_n5900 --use_gpu
+#python test.py ../tsp_n5900/test3.txt ../model_result_n5900/Apr25_14-21-43_167db68588d5493fbd47a7a145fa3e02/checkpoint_best_val.pt ../run_result_n5900 regret_pred ../test_model4 --use_gpu
 #python generate_instances.py 8000 128 ../tsplib95_10000_instances_64_node/tsp_all_instances_adj_tour_cost.txt ../generatedn8000
 #python test_regret.py
 #python remove_extra_edges.py

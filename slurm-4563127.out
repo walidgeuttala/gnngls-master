@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/test.py", line 108, in <module>
+    test_set = datasets.TSPDataset(args.data_path)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/gnngls/datasets.py", line 66, in __init__
+    self.instances = sorted([line.strip() for line in open(instances_file)])
+                                                      ^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '../tsp_n5900/test3.txt'

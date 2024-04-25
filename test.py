@@ -72,6 +72,26 @@ def tsp_to_atsp_instance(G1):
     
     return G2
 
+
+def tsp_to_atsp_instance(G1):
+    num_nodes = G1.number_of_nodes() // 2
+    G2 = nx.DiGraph()
+    G2.add_nodes_from(range(num_nodes))
+    G2.add_edges_from([(u, v) for u in range(num_nodes) for v in range(num_nodes) if u != v])
+
+    first_edge = list(G1.edges)[0]
+
+    # Get the attribute names of the first edge
+    attribute_names = G1[first_edge[0]][first_edge[1]].keys()
+    attribute_names_list = list(attribute_names)
+    for attribute_name in attribute_names_list:
+        attribute, _ = nx.attr_matrix(G1, attribute_name)
+        attribute = attribute[num_nodes:, :num_nodes]
+        for u, v in G2.edges():
+            G2[u][v][attribute_name] = attribute[u, v]
+    
+    return G2
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Test model')
     parser.add_argument('data_path', type=pathlib.Path)
@@ -142,21 +162,9 @@ if __name__ == '__main__':
             es = H.ndata['e'].cpu().numpy()
             for e, regret_pred_i in zip(es, regret_pred):
                 G.edges[e]['regret_pred'] = np.maximum(regret_pred_i.item(), 0)
+            G = tsp_to_atsp_instance(G)
             init_tour = algorithms.nearest_neighbor(G, 0, weight='regret_pred')
         
-        init_cost = gnngls.tour_cost(G, init_tour)
-
-
-
-        
-
-        #num_nodes = G.number_of_nodes()
-        # atsp_edge_weight, _ = nx.attr_matrix(G, 'weight')
-        # tsp = TSPExact(atsp_edge_weight)
-        # tsp_edge_weight = tsp.cost_matrix
-        # tsp_tour = tsp.tranfer_tour(init_tour, num_nodes)
-        # tsp_G = nx.Graph(np.triu(tsp_edge_weight))
-        #value = 1e6 * num_nodes / 2
         init_cost = gnngls.tour_cost(G, init_tour)
         
         best_tour, best_cost, search_progress_i, cnt_ans = algorithms.guided_local_search(G, init_tour, init_cost,
