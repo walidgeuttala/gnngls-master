@@ -1,0 +1,2 @@
+device = cuda
+  0%|          | 0/10 [00:00<?, ?it/s]  0%|          | 0/10 [04:03<?, ?it/s, Train Loss=0.0077, Validation Loss=0.0043, correlation : =0.7000, cosin correlation : =0.9641, gap : =27.0323] 10%|█         | 1/10 [04:03<36:28, 243.12s/it, Train Loss=0.0077, Validation Loss=0.0043, correlation : =0.7000, cosin correlation : =0.9641, gap : =27.0323]

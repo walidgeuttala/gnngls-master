@@ -78,7 +78,7 @@ class TSPDataset(torch.utils.data.Dataset):
         # only works for homogenous datasets
         G = nx.read_gpickle(self.root_dir / self.instances[0])
         lG = nx.line_graph(G)
-        #lG = lG.to_undirected()
+        lG = lG.to_undirected()
         for n in lG.nodes:
             lG.nodes[n]['e'] = n
         
@@ -119,7 +119,6 @@ class TSPDataset(torch.utils.data.Dataset):
         H = copy.deepcopy(self.G)
         H.ndata['weight'] = torch.tensor(features_transformed, dtype=torch.float32)
         H.ndata['regret'] = torch.tensor(regret_transformed, dtype=torch.float32)
-        H.ndata['regret'] = torch.nn.functional.softmax(H.ndata['regret'], dim=1)
 
         H.ndata['in_solution'] = torch.tensor(regret, dtype=torch.float32)
         return H
