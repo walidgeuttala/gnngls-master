@@ -79,7 +79,7 @@ def directed_string_graph(G1):
               ('node', 'pp', 'node'): pp}
     
     G2 = dgl.heterograph(edge_types)
-    G2 = dgl.add_reverse_edges(G2)
+    #G2 = dgl.add_reverse_edges(G2)
 
     # G2.ndata['weight'] = torch.tensor(features, dtype=torch.float32)
     # G2.ndata['regret'] = torch.tensor(regret, dtype=torch.float32)
@@ -103,7 +103,7 @@ def directed_string_graph(G1):
         print(G2.adj(etype=etype))
     return G2
 
-complete_graph = nx.complete_graph(4).to_directed()
+complete_graph = nx.complete_graph(3).to_directed()
 print(complete_graph.edges())
 g = directed_string_graph(complete_graph)
 print(g.num_nodes())
