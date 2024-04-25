@@ -18,7 +18,7 @@ import itertools
 from torch.utils.tensorboard import SummaryWriter
 import networkx as nx
 import gnngls
-from gnngls import models2, datasets, algorithms
+from gnngls import models, datasets, algorithms
 import torch.nn.functional as F
 # Suppress FutureWarnings
 import warnings
@@ -164,7 +164,7 @@ def run(args):
 
     _, feat_dim = train_set[0].ndata['weight'].shape
     set_random_seed(1234)
-    model = models2.EdgePropertyPredictionModel(
+    model = models.EdgePropertyPredictionModel2(
         feat_dim,
         args.embed_dim,
         1,
@@ -275,12 +275,12 @@ def run(args):
 
 def main():
     search_space = {
-        "embed_dim": [128, 64,32],
-        "embed_dim2": [128, 64],
-        "n_layers": [4, 3, 2, 1],
-        "lr_init": [1e-3, 1e-4],
-        "n_heads": [16, 8, 4],
-        "kj": ['cat', 'max']
+        "embed_dim": [128],
+        "embed_dim2": [128],
+        "n_layers": [4],
+        "lr_init": [1e-3],
+        "n_heads": [16],
+        "kj": ['cat']
     }
 
     args = parse_args()

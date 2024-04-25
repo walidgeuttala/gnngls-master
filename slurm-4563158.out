@@ -1,0 +1,11 @@
+device = cuda
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/train4.py", line 325, in <module>
+    main()
+  File "/project/p_gnn001/code/tsp/tsp/train4.py", line 318, in main
+    val_loss = run(args)
+               ^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/train4.py", line 169, in run
+    model = models2.EdgePropertyPredictionModel3(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'gnngls.models2' has no attribute 'EdgePropertyPredictionModel3'. Did you mean: 'EdgePropertyPredictionModel'?

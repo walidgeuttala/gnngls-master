@@ -166,7 +166,7 @@ def run(args):
 
     feat_dim = 1
     set_random_seed(1234)
-    model = models.EdgePropertyPredictionModel2(
+    model = models.EdgePropertyPredictionModel3(
         feat_dim,
         args.embed_dim,
         1,
