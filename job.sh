@@ -18,8 +18,13 @@
 #python train.py ../generated ../model_result --use_gpu
 #python test_me.py
 #python preprocess_dataset2.py ../generatedn2000
-python train2.py ../atsp_n5900 ../model_result_n5900 --use_gpu
-#python test.py ../atsp_n5900/test3.txt ../model_result_n5900/Apr24_20-47-23_b79a061deed3469484a4bb05fcc9183c/checkpoint_best_val.pt ../run_result_n5900 regret_pred ../test_do --use_gpu
+#python train2.py ../atsp_n5900 ../model_result_n5900 --use_gpu
+python test.py ../atsp_n5900/test3.txt ../model_result_n5900/Apr25_07-23-29_c9d520ac762949bca09ff5df493ede10/checkpoint_best_val.pt ../run_result_n5900 regret_pred ../test_model2 --use_gpu
 #python generate_instances.py 8000 128 ../tsplib95_10000_instances_64_node/tsp_all_instances_adj_tour_cost.txt ../generatedn8000
 #python test_regret.py
 #python remove_extra_edges.py
+
+
+
+#Apr24_20-47-23_b79a061deed3469484a4bb05fcc9183c   hetrov1 RGB
+#Apr25_07-23-29_c9d520ac762949bca09ff5df493ede10    hetrov2 RGB4

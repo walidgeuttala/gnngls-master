@@ -1,0 +1,7 @@
+device = cuda
+  0%|          | 0/100 [00:00<?, ?it/s]  0%|          | 0/100 [00:10<?, ?it/s]
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/test.py", line 175, in <module>
+    with open(args.output_path / f"instance{cnt}.txt", "w") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '../test_model2/instance0.txt'

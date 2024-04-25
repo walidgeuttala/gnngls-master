@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 333, in <module>
+    main()
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 326, in main
+    val_loss = run(args)
+               ^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 160, in run
+    train_set = datasets.TSPDataset(args.data_dir / 'train.txt')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/gnngls/datasets.py", line 147, in __init__
+    self.G, self.edge_id = directed_string_graph(G)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/gnngls/datasets.py", line 123, in directed_string_graph
+    G2.ndata['e'] = {'node1':torch.tensor(list(edge_id.keys()))}
+    ~~~~~~~~^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/dgl/view.py", line 95, in __setitem__
+    assert isinstance(val, dict) is False, (
+AssertionError: The HeteroNodeDataView has only one node type. please pass a tensor directly

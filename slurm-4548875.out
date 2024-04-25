@@ -1,0 +1,10 @@
+device = cuda
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/test.py", line 106, in <module>
+    model.load_state_dict(checkpoint['model_state_dict'])
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 2153, in load_state_dict
+    raise RuntimeError('Error(s) in loading state_dict for {}:\n\t{}'.format(
+RuntimeError: Error(s) in loading state_dict for RGCN:
+	Missing key(s) in state_dict: "embed_layer.0.linears.0.weight", "embed_layer.0.linears.1.weight", "embed_layer.0.batch_norm.weight", "embed_layer.0.batch_norm.bias", "embed_layer.0.batch_norm.running_mean", "embed_layer.0.batch_norm.running_var", "embed_layer.1.linears.0.weight", "embed_layer.1.linears.1.weight", "embed_layer.1.batch_norm.weight", "embed_layer.1.batch_norm.bias", "embed_layer.1.batch_norm.running_mean", "embed_layer.1.batch_norm.running_var", "embed_layer.2.linears.0.weight", "embed_layer.2.linears.1.weight", "embed_layer.2.batch_norm.weight", "embed_layer.2.batch_norm.bias", "embed_layer.2.batch_norm.running_mean", "embed_layer.2.batch_norm.running_var", "embed_layer.3.linears.0.weight", "embed_layer.3.linears.1.weight", "embed_layer.3.batch_norm.weight", "embed_layer.3.batch_norm.bias", "embed_layer.3.batch_norm.running_mean", "embed_layer.3.batch_norm.running_var", "embed_layer.4.linears.0.weight", "embed_layer.4.linears.1.weight", "embed_layer.4.batch_norm.weight", "embed_layer.4.batch_norm.bias", "embed_layer.4.batch_norm.running_mean", "embed_layer.4.batch_norm.running_var". 
+	Unexpected key(s) in state_dict: "embed_layer.linears.0.weight", "embed_layer.linears.1.weight", "embed_layer.batch_norm.weight", "embed_layer.batch_norm.bias", "embed_layer.batch_norm.running_mean", "embed_layer.batch_norm.running_var", "embed_layer.batch_norm.num_batches_tracked". 
+	size mismatch for decision_layer.linears.0.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([128, 640]).

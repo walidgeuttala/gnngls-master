@@ -92,7 +92,7 @@ if __name__ == '__main__':
         print('device =', device)
 
         feat_dim = 1
-        model = models.RGCN(
+        model = models.RGCN4(
             feat_dim,
             params['embed_dim'],
             1,
@@ -136,7 +136,7 @@ if __name__ == '__main__':
             with torch.no_grad():
                 y_pred = model(H, x)
             regret_pred = test_set.scalers['regret'].inverse_transform(y_pred.cpu().numpy())
-            es = H.ndata['e']['node1'].cpu().numpy()
+            es = H.ndata['e'].cpu().numpy()
             for e, regret_pred_i in zip(es, regret_pred):
                 G.edges[e]['regret_pred'] = np.maximum(regret_pred_i.item(), 0)
             init_tour = algorithms.nearest_neighbor(G, 0, weight='regret_pred')
@@ -180,7 +180,7 @@ if __name__ == '__main__':
 
             # Save array2
             f.write("regret:\n")
-            np.savetxt(f, add_diag(H.ndata['regret']['node1'].cpu()).numpy(), fmt="%.8f", delimiter=" ")
+            np.savetxt(f, add_diag(H.ndata['regret'].cpu()).numpy(), fmt="%.8f", delimiter=" ")
             f.write("\n")
 
             # Save array3
@@ -200,8 +200,8 @@ if __name__ == '__main__':
         
         init_gaps.append(init_gap)
         final_gaps.append(final_gap)
-        avg_corr_normal.append(correlation_matrix(y_pred.cpu(), H.ndata['regret']['node1'].cpu()))
-        avg_corr_cosine.append(cosine_similarity(y_pred.cpu().view(-1), H.ndata['regret']['node1'].cpu().view(-1)))
+        avg_corr_normal.append(correlation_matrix(y_pred.cpu(), H.ndata['regret'].cpu()))
+        avg_corr_cosine.append(cosine_similarity(y_pred.cpu().view(-1), H.ndata['regret'].cpu().view(-1)))
         avg_cnt_ans.append(cnt_ans)
 
         pbar.set_postfix({ 
@@ -241,7 +241,7 @@ if __name__ == '__main__':
     #     print(cnt_ans)
 
     #     edge_weight, _ = nx.attr_matrix(G, 'weight')
-    #     corr = correlation_matrix(y_pred.cpu(),H.ndata['regret']['node1'].cpu())
+    #     corr = correlation_matrix(y_pred.cpu(),H.ndata['regret'].cpu())
     #     corr_all += corr
 
     #     with open(args.output_path / f"instance{cnt}.txt", "w") as f:
@@ -252,7 +252,7 @@ if __name__ == '__main__':
 
     #         # Save array2
     #         f.write("regret:\n")
-    #         np.savetxt(f, add_diag(H.ndata['regret']['node1'].cpu()).numpy(), fmt="%.8f", delimiter=" ")
+    #         np.savetxt(f, add_diag(H.ndata['regret'].cpu()).numpy(), fmt="%.8f", delimiter=" ")
     #         f.write("\n")
 
     #         # Save array3

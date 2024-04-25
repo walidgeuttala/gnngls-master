@@ -1,0 +1,2 @@
+device = cuda
+  0%|          | 0/10 [00:00<?, ?it/s]  0%|          | 0/10 [01:49<?, ?it/s, Train Loss=0.0063, Validation Loss=0.0130, correlation : =0.5919, cosin correlation : =0.9053, gap : =75.1041] 10%|█         | 1/10 [01:49<16:27, 109.71s/it, Train Loss=0.0063, Validation Loss=0.0130, correlation : =0.5919, cosin correlation : =0.9053, gap : =75.1041]slurmstepd: error: *** JOB 4548855 ON x1001c2s0b0n0 CANCELLED AT 2024-04-25T07:12:02 ***

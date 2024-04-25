@@ -1,0 +1,30 @@
+device = cuda
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/test.py", line 106, in <module>
+    model.load_state_dict(checkpoint['model_state_dict'])
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 2153, in load_state_dict
+    raise RuntimeError('Error(s) in loading state_dict for {}:\n\t{}'.format(
+RuntimeError: Error(s) in loading state_dict for RGCN3:
+	Missing key(s) in state_dict: "batch_norm.weight", "batch_norm.bias", "batch_norm.running_mean", "batch_norm.running_var". 
+	size mismatch for embed_layer.linears.1.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([640, 128]).
+	size mismatch for gnn_layers.0.mods.pp.fc.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([128, 640]).
+	size mismatch for gnn_layers.0.mods.ss.fc.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([128, 640]).
+	size mismatch for gnn_layers.0.mods.st.fc.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([128, 640]).
+	size mismatch for gnn_layers.0.mods.ts.fc.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([128, 640]).
+	size mismatch for gnn_layers.0.mods.tt.fc.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([128, 640]).
+	size mismatch for gnn_layers.1.mods.pp.fc.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([128, 640]).
+	size mismatch for gnn_layers.1.mods.ss.fc.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([128, 640]).
+	size mismatch for gnn_layers.1.mods.st.fc.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([128, 640]).
+	size mismatch for gnn_layers.1.mods.ts.fc.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([128, 640]).
+	size mismatch for gnn_layers.1.mods.tt.fc.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([128, 640]).
+	size mismatch for gnn_layers.2.mods.pp.fc.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([128, 640]).
+	size mismatch for gnn_layers.2.mods.ss.fc.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([128, 640]).
+	size mismatch for gnn_layers.2.mods.st.fc.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([128, 640]).
+	size mismatch for gnn_layers.2.mods.ts.fc.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([128, 640]).
+	size mismatch for gnn_layers.2.mods.tt.fc.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([128, 640]).
+	size mismatch for gnn_layers.3.mods.pp.fc.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([128, 640]).
+	size mismatch for gnn_layers.3.mods.ss.fc.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([128, 640]).
+	size mismatch for gnn_layers.3.mods.st.fc.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([128, 640]).
+	size mismatch for gnn_layers.3.mods.ts.fc.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([128, 640]).
+	size mismatch for gnn_layers.3.mods.tt.fc.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([128, 640]).
+	size mismatch for decision_layer.linears.0.weight: copying a param with shape torch.Size([128, 128]) from checkpoint, the shape in current model is torch.Size([128, 640]).

@@ -112,17 +112,15 @@ def directed_string_graph(G1):
             i += 1
 
     edge_types = {('node1', 'ss', 'node1'): ss,
-              ('node2', 'st', 'node2'): st,
-              ('node3', 'ts', 'node3'): ts,
-              ('node4', 'tt', 'node4'): tt,
-              ('node5', 'pp', 'node5'): pp}
+              ('node1', 'st', 'node1'): st,
+              ('node1', 'ts', 'node1'): ts,
+               ('node1', 'tt', 'node1'): tt,
+               ('node1', 'pp', 'node1'): pp}
     
     G2 = dgl.heterograph(edge_types)
     G2 = dgl.add_reverse_edges(G2)
-    e_dict = dict()
-    for idx in range(len(edge_types)):
-        e_dict[f'node{idx+1}'] = torch.tensor(list(edge_id.keys())).clone()
-    G2.ndata['e'] = e_dict
+    
+    G2.ndata['e'] = torch.tensor(list(edge_id.keys()))
     # G2.ndata['e'] = torch.tensor(list(edge_id.keys())).clone()
     return G2, edge_id
 
@@ -176,19 +174,12 @@ class TSPDataset(torch.utils.data.Dataset):
         regret = np.vstack(regret)
         regret_transformed = self.scalers['regret'].transform(regret)
         in_solution = np.vstack(in_solution)
-        weight_dict = dict()
-        regret_dict = dict()
-        in_solution_dict = dict()
-        for idx in range(5):
-            weight_dict[f'node{idx+1}'] = torch.tensor(features_transformed, dtype=torch.float32).clone()
-            regret_dict[f'node{idx+1}'] = torch.tensor(regret_transformed, dtype=torch.float32).clone()
-            in_solution_dict[f'node{idx+1}'] = torch.tensor(in_solution, dtype=torch.float32).clone()
-
+        
         H = copy.deepcopy(self.G)
-        H.ndata['weight'] = weight_dict
-        H.ndata['regret'] = regret_dict
-        H.ndata['in_solution'] = in_solution_dict
-        H.ndata['e'] = self.G.ndata['e']
+        H.ndata['weight'] = torch.tensor(features_transformed, dtype=torch.float32)
+        H.ndata['regret'] = torch.tensor(regret_transformed, dtype=torch.float32)
+        H.ndata['in_solution'] = torch.tensor(in_solution, dtype=torch.float32)
+        H.ndata['e'] = self.G.ndata['e'].clone()
         return H
 
 
