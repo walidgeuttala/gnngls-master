@@ -1,9 +1,10 @@
-from gnngls import datasets
-import torch
-val_data = datasets.TSPDataset(f"../tsp_n5900/val.txt")
+import numpy as np
 
-ans = 0
-for idx in range(len(val_data)):
-    ans += val_data[idx].ndata['regret'].mean()
+# Load the array from the file
+loaded_arr = np.load('my_array.npy')
 
-print(ans/len(val_data))
+# Print the shape of the array
+array = loaded_arr.transpose(2, 1, 0).reshape(100, 18)
+
+print("Shape of the numpy array:", array.shape)
+np.savetxt('array_data.txt', array)

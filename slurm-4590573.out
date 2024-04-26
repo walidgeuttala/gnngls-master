@@ -1,0 +1,6 @@
+  0%|          | 0/100 [00:00<?, ?it/s]  0%|          | 0/100 [00:10<?, ?it/s]
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/test_cal2.py", line 85, in <module>
+    if best_cost != best_tour:
+       ^^^^^^^^^^^^^^^^^^^^^^
+ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()

@@ -53,11 +53,12 @@ init_gap_axis = []
 mid_gap_axis = []
 final_gap_axis = []
 
-pbar = tqdm.tqdm(test_set.instances)
+
 for noise in x_axis:
     init_gaps = []
     mid_gaps = []
     final_gaps =[]
+    pbar = tqdm.tqdm(test_set.instances)
     dir = "../noisyRegrets/withStandardDeviation0_{:02d}/".format(noise)
     for idx, instance in enumerate(pbar):
         G = nx.read_gpickle(test_set.root_dir / instance)
@@ -81,10 +82,15 @@ for noise in x_axis:
                                                                                     perturbation_moves=20,
                                                                                     first_improvement=False)
 
+        costy = gnngls.tour_cost(G, best_tour)
+        if best_cost != costy:
+            print('error',flush=True)
+            break
+
         init_gaps.append((init_cost/ opt_cost - 1) * 100)
         mid_gaps.append((cur_cost/ opt_cost - 1) * 100)
         final_gaps.append((best_cost/ opt_cost - 1) * 100)
-
+    pbar.close()
     init_gap_axis.append(init_gaps)
     mid_gap_axis.append(mid_gaps)
     final_gap_axis.append(final_gaps)
