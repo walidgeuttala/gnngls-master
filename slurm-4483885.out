@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "/project/p_gnn001/code/tsp/tsp/train3.py", line 21, in <module>
-    from gnngls import models3, datasets, algorithms
-ImportError: cannot import name 'models3' from 'gnngls' (/project/p_gnn001/code/tsp/tsp/gnngls/__init__.py)
