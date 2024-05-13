@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/test.py", line 86, in <module>
+    test_set = datasets.TSPDataset(args.data_path)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/gnngls/datasets.py", line 149, in __init__
+    self.G, self.edge_id = directed_string_graph(G)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/gnngls/datasets.py", line 81, in directed_string_graph
+    pp.append((edge_id[(i, j)], edge_id[(j, i)]))
+               ~~~~~~~^^^^^^^^
+KeyError: (0, 1)

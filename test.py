@@ -91,7 +91,7 @@ if __name__ == '__main__':
 
         _, feat_dim = test_set[0].ndata['weight'].shape
 
-        model = models.EdgePropertyPredictionModel(
+        model = models.RGCN(
             feat_dim,
             params['embed_dim'],
             1,

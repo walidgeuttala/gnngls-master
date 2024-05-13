@@ -1,0 +1,11 @@
+device = cuda
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 330, in <module>
+    main()
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 323, in main
+    val_loss = run(args)
+               ^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 176, in run
+    model = models.RGCN2(
+            ^^^^^^^^^^^^^
+TypeError: RGCN2.__init__() takes 5 positional arguments but 7 were given

@@ -304,10 +304,10 @@ def main():
     search_space = {
         "embed_dim": [128],
         "embd_dim2": [128*2],
-        "n_layers": [4],
-        "lr_init": [1e-3],
-        "n_heads": [16],
-        "kj": ['cat'],
+        "n_layers": [3],
+        "lr_init": [1e-2],
+        "n_heads": [32],
+        "kj": ['sum'],
     }
 
     args = parse_args()
