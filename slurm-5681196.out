@@ -1,0 +1,33 @@
+tensor(indices=tensor([[4, 9, 0, 1, 2, 7, 6, 6, 5, 3, 9, 1, 7, 4, 3, 7, 4, 4, 7,
+                        5],
+                       [4, 5, 7, 2, 4, 2, 0, 7, 5, 6, 2, 1, 0, 6, 7, 6, 2, 9, 7,
+                        4]]),
+       values=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+                      1., 1., 1., 1., 1., 1.]),
+       size=(10, 10), nnz=20, layout=torch.sparse_coo)
+torch.Size([10, 8, 2])
+torch.Size([20, 8, 2])
+torch.Size([20, 8, 1])
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/models_test.py", line 155, in <module>
+    output = model(adjs, inputs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/models_test.py", line 125, in forward
+    h_rel = self.gnn_layers[layer_idx][rel](adj, h)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/models_test.py", line 59, in forward
+    h_prime[:, i, :] = torch.sparse.mm(adj, h_lifted_i)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: The expanded size of the tensor (20) must match the existing size (2) at non-singleton dimension 1.  Target sizes: [10, 20].  Tensor sizes: [10, 2]

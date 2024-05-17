@@ -1,0 +1,30 @@
+tensor(indices=tensor([[3, 6, 6, 4, 5, 5, 2, 7, 8, 6, 5, 2, 5, 9, 7, 9, 5, 2, 1,
+                        3],
+                       [6, 2, 7, 1, 8, 5, 4, 7, 5, 8, 2, 8, 5, 6, 0, 1, 4, 2, 1,
+                        5]]),
+       values=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+                      1., 1., 1., 1., 1., 1.]),
+       size=(10, 10), nnz=20, layout=torch.sparse_coo)
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/models_test.py", line 120, in <module>
+    output = model(adjs, inputs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/models_test.py", line 90, in forward
+    h_rel = self.gnn_layers[layer_idx][rel](adj, h)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/models_test.py", line 63, in forward
+    attention = torch.sparse.softmax(torch.sparse_coo_tensor(adj._indices(), e.view(-1), adj.size()), dim=1)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: indices and values must have same nnz, but got nnz from indices: 20, nnz from values: 640

@@ -1,0 +1,33 @@
+tensor(indices=tensor([[4, 3, 6, 6, 8, 6, 6, 1, 2, 6, 3, 8, 2, 3, 1, 1, 7, 1, 0,
+                        3],
+                       [9, 2, 4, 4, 5, 5, 3, 7, 7, 0, 5, 8, 1, 2, 9, 8, 8, 8, 5,
+                        6]]),
+       values=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+                      1., 1., 1., 1., 1., 1.]),
+       size=(10, 10), nnz=20, layout=torch.sparse_coo)
+torch.Size([10, 8, 2])
+torch.Size([20, 8, 2])
+torch.Size([20, 8, 1])
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/models_test.py", line 151, in <module>
+    output = model(adjs, inputs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/models_test.py", line 121, in forward
+    h_rel = self.gnn_layers[layer_idx][rel](adj, h)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/models_test.py", line 55, in forward
+    h_prime[:, i, :] = torch.sparse.mm(adj, (h_lifted[:, i, :] * attentions_per_edge[:, i].unsqueeze(-1)).view(-1, self.out_feats))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: addmm: Argument #3 (dense): Expected dim 0 size 10, got 400
