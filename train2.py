@@ -181,7 +181,7 @@ def run(args):
         1,
         train_set.etypes,
         args.n_layers,
-        args.n_heads
+        1
     ).to(device)
 
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr_init)
@@ -307,7 +307,7 @@ def main():
     search_space = {
         "embed_dim": [128],
         "embd_dim2": [128],
-        "n_layers": [4],
+        "n_layers": [2],
         "lr_init": [1e-3],
         "n_heads": [16],
         "kj": ['cat'],
