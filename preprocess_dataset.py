@@ -27,8 +27,8 @@ if __name__ == '__main__':
     random.shuffle(instances)
 
     train_set = instances[:args.n_train]
-    test_set = instances[args.n_train:args.n_train + args.n_test]
-    val_set = instances[args.n_train + args.n_test:args.n_train + args.n_test + args.n_val]
+    test_set = instances[:args.n_train]
+    val_set = instances[:args.n_train]
 
     for data_set, file_name in zip([train_set, val_set, test_set], ['train.txt', 'val.txt', 'test.txt']):
         with open(args.dir / file_name, 'w') as data_file:
@@ -37,8 +37,7 @@ if __name__ == '__main__':
             print(f'{file_name} contains {len(data_set)} instances.')
 
     scalers = {
-        'features': MinMaxScaler(),
-        'regret': MinMaxScaler()
+        'features': MinMaxScaler()
     }
 
     for instance_path in tqdm.tqdm(train_set, total=len(train_set)):

@@ -158,7 +158,7 @@ def run(args):
         1,
         train_set.etypes,
         args.n_layers,
-        16
+        args.n_heads
     ).to(device)
 
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr_init)

@@ -17,7 +17,7 @@ import linecache
 
 def prepare_instance(G):
     datasets.set_features(G)
-    #datasets.set_labels(G)
+    datasets.set_labels(G)
     return G
 
 def get_solved_instances(n_nodes, n_instances):
@@ -45,28 +45,27 @@ def get_solved_instances2(n_nodes, n_instances, all_instances):
    
     for i in range(n_instances):
         line = linecache.getline(all_instances, i+2).strip()
-        print(len(line))
-        # break
-        # G = nx.Graph()
-        # adj, opt_solution, cost = line.split(',')
-        # adj = adj.split(' ')
-        # print(len(adj))
-        # print(len(opt_solution))
-        # n_nodes = len(opt_solution)
-        # G.add_nodes_from(range(n_nodes))
-        # opt_solution = [int(x) for x in opt_solution.split()]
+        
+        G = nx.DiGraph()
+        adj, opt_solution, cost = line.split(',')
+        adj = adj.split(' ')[:-1]
+        print(len(adj))
+        n_nodes = len(opt_solution.split()) - 1
+        print(n_nodes)
+        G.add_nodes_from(range(n_nodes))
+        opt_solution = [int(x) for x in opt_solution.split()]
        
-        # # Add the edges for the DiGraph and be sure that does not have self loops in the node
-        # for j in range(n_nodes):
-        #     for k in range(n_nodes):
-        #         w = float(adj[j*n_nodes+k])
-        #         if j != k:
-        #             G.add_edge(j, k, weight=w)
+        # Add the edges for the DiGraph and be sure that does not have self loops in the node
+        for j in range(n_nodes):
+            for k in range(n_nodes):
+                w = float(adj[j*n_nodes+k])
+                if j != k:
+                    G.add_edge(j, k, weight=w)
             
-        # in_solution = gnngls.tour_to_edge_attribute(G, opt_solution)
-        # nx.set_edge_attributes(G, in_solution, 'in_solution')
+        in_solution = gnngls.tour_to_edge_attribute(G, opt_solution)
+        nx.set_edge_attributes(G, in_solution, 'in_solution')
 
-        # yield G
+        yield G
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate a dataset.')

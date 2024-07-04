@@ -130,7 +130,7 @@ class TSPDataset(torch.utils.data.Dataset):
             instances_file = pathlib.Path(instances_file)
         self.root_dir = instances_file.parent
 
-        self.instances = sorted([line.strip() for line in open(instances_file)])
+        self.instances = [line.strip() for line in open(instances_file)]
 
         if scalers_file is None:
             scalers_file = self.root_dir / 'scalers.pkl'
@@ -161,6 +161,7 @@ class TSPDataset(torch.utils.data.Dataset):
         return H
 
     def get_scaled_features(self, G):
+        
         features = []
         regret = []
         in_solution = []
@@ -180,6 +181,30 @@ class TSPDataset(torch.utils.data.Dataset):
         H.ndata['regret'] = torch.tensor(regret_transformed, dtype=torch.float32)
         H.ndata['in_solution'] = torch.tensor(in_solution, dtype=torch.float32)
         H.ndata['e'] = self.G.ndata['e'].clone()
+        return H
+    
+    def get_test_scaled_features_not_samesize_graphs(self, G):
+
+        self.G, self.edge_id = directed_string_graph(G)
+        # tranfer to hmogines graph
+        # self.G = dgl.to_homogeneous(self.G, ndata=['e'])
+        self.etypes = self.G.etypes
+
+        features = []
+        in_solution = []
+        for e, idx in self.edge_id.items():
+            features.append(G.edges[e]['weight'])
+            in_solution.append(G.edges[e]['in_solution'])
+
+        features = np.vstack(features)
+        features_transformed = self.scalers['weight'].transform(features)        
+        in_solution = np.vstack(in_solution)
+        
+        H = copy.deepcopy(self.G)
+        H.ndata['weight'] = torch.tensor(features_transformed, dtype=torch.float32)
+        H.ndata['in_solution'] = torch.tensor(in_solution, dtype=torch.float32)
+        H.ndata['e'] = self.G.ndata['e'].clone()
+
         return H
 
 

@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "/project/p_gnn001/code/tsp/tsp/generate_instances.py", line 76, in <module>
-    raise Exception(f'Output directory {args.output_dir} exists.')
-Exception: Output directory ../tsp_lib_test exists.

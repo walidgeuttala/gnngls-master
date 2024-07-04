@@ -21,8 +21,8 @@ from atps_to_tsp import TSPExact
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-def add_diag(t1):
-    n = 64
+def add_diag(num_nodes, t1):
+    n = num_nodes
     t2 = torch.zeros(n, n, dtype=torch.float32)
     cnt = 0
     for i in range(n):
@@ -98,7 +98,7 @@ if __name__ == '__main__':
             1,
             test_set.etypes,
             params['n_layers'],
-            params['n_heads']
+            16
         ).to(device)
 
         checkpoint = torch.load(args.model_path, map_location=device)
@@ -131,7 +131,7 @@ if __name__ == '__main__':
         })
 
         if 'regret_pred' in args.guides:
-            H = test_set.get_scaled_features(G).to(device)
+            H = test_set.get_test_scaled_features_not_samesize_graphs(G).to(device)
             x = H.ndata['weight']
             with torch.no_grad():
                 y_pred = model(H, x)
@@ -140,20 +140,10 @@ if __name__ == '__main__':
             for e, regret_pred_i in zip(es, regret_pred):
                 G.edges[e]['regret_pred'] = np.maximum(regret_pred_i.item(), 0)
             init_tour = algorithms.nearest_neighbor(G, 0, weight='regret_pred')
-        
-        init_cost = gnngls.tour_cost(G, init_tour)
+        else:
+            init_tour = algorithms.nearest_neighbor(G, 0, weight='weight')
 
-
-
-        
-
-        #num_nodes = G.number_of_nodes()
-        # atsp_edge_weight, _ = nx.attr_matrix(G, 'weight')
-        # tsp = TSPExact(atsp_edge_weight)
-        # tsp_edge_weight = tsp.cost_matrix
-        # tsp_tour = tsp.tranfer_tour(init_tour, num_nodes)
-        # tsp_G = nx.Graph(np.triu(tsp_edge_weight))
-        #value = 1e6 * num_nodes / 2
+        num_nodes = len(init_tour) - 1
         init_cost = gnngls.tour_cost(G, init_tour)
         
         best_tour, best_cost, search_progress_i, cnt_ans = algorithms.guided_local_search(G, init_tour, init_cost,
@@ -161,37 +151,40 @@ if __name__ == '__main__':
                                                                                  guides=args.guides,
                                                                                  perturbation_moves=args.perturbation_moves,
                                                                                  first_improvement=False)
+        best_cost2 = gnngls.tour_cost(G, best_tour)
+
         for row in search_progress_i:
             row.update({
                 'instance': instance,
                 'opt_cost': opt_cost
             })
-        
+        print(f'best tour {best_tour}')
         search_progress.append(row)
         edge_weight, _ = nx.attr_matrix(G, 'weight')
-        regret, _ = nx.attr_matrix(G, 'regret')
-        regret_pred, _ = nx.attr_matrix(G, 'regret_pred')
-     
+        #regret, _ = nx.attr_matrix(G, 'regret')
+        #regret_pred, _ = nx.attr_matrix(G, 'regret_pred')
+        #print(y_pred.shape)
         with open(args.output_path / f"instance{cnt}.txt", "w") as f:
             # Save array1
             f.write("edge_weight:\n")
             np.savetxt(f, edge_weight, fmt="%.8f", delimiter=" ")
             f.write("\n")
 
-            # Save array2
-            f.write("regret:\n")
-            np.savetxt(f, add_diag(H.ndata['regret'].cpu()).numpy(), fmt="%.8f", delimiter=" ")
-            f.write("\n")
+            # # Save array2
+            # f.write("regret:\n")
+            # np.savetxt(f, add_diag(H.ndata['regret'].cpu()).numpy(), fmt="%.8f", delimiter=" ")
+            # f.write("\n")
 
             # Save array3
-            f.write("regret_pred:\n")
-            np.savetxt(f, add_diag(y_pred.cpu()).numpy(), fmt="%.8f", delimiter=" ")
-            f.write("\n")
+            # f.write("regret_pred:\n")
+            # np.savetxt(f, add_diag(num_nodes, y_pred.cpu()).numpy(), fmt="%.8f", delimiter=" ")
+            # f.write("\n")
 
             f.write(f"opt_cost: {opt_cost}\n")
             f.write(f"num_iterations: {cnt_ans}\n")
             f.write(f"init_cost: {init_cost}\n")
             f.write(f"best_cost: {best_cost}\n")
+            f.write(f"best_cost2: {best_cost2}\n")
             
         
         cnt += 1
@@ -200,15 +193,18 @@ if __name__ == '__main__':
         
         init_gaps.append(init_gap)
         final_gaps.append(final_gap)
-        avg_corr_normal.append(correlation_matrix(y_pred.cpu(), H.ndata['regret'].cpu()))
-        avg_corr_cosine.append(cosine_similarity(y_pred.cpu().view(-1), H.ndata['regret'].cpu().view(-1)))
+        #avg_corr_normal.append(correlation_matrix(y_pred.cpu(), H.ndata['regret'].cpu()))
+        #avg_corr_cosine.append(cosine_similarity(y_pred.cpu().view(-1), H.ndata['regret'].cpu().view(-1)))
         avg_cnt_ans.append(cnt_ans)
 
         pbar.set_postfix({ 
                 'Avg Gap init:': '{:.4f}'.format(np.mean(init_gaps)),
                 'Avg Gap best:': '{:.4f}'.format(np.mean(final_gaps)),
-                'Avg corr normal ': '{:.4f}'.format(np.mean(avg_corr_normal)*100),
-                'Avg cosine normal ': '{:.4f}'.format(np.mean(avg_corr_cosine)*100),
+                'best_cost2:': '{:.4f}'.format(best_cost2),
+                'best_cost:': '{:.4f}'.format(best_cost),
+                'opt_cost:': '{:.4f}'.format(opt_cost),
+                #'Avg corr normal ': '{:.4f}'.format(np.mean(avg_corr_normal)*100),
+                #'Avg cosine normal ': '{:.4f}'.format(np.mean(avg_corr_cosine)*100),
                 'Avg counts ': '{:.4f}'.format(np.mean(avg_cnt_ans)),
             })
 
