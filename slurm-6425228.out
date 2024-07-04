@@ -1,0 +1,100 @@
+/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/lkh/__init__.py:23: UserWarning: Subclassing LKHProblem is recommended. Proceed at your own risk!
+  warnings.warn('Subclassing LKHProblem is recommended. Proceed at your own risk!')
+Traceback (most recent call last):
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/lkh/__init__.py", line 47, in solve
+    subprocess.check_output([solver, par_file.name], stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL)
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['../LKH-3.0.9/LKH', '/tmp/slurm-6425228/tmp9umjep6t']' died with <Signals.SIGABRT: 6>.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/atsp_solve.py", line 99, in <module>
+    tour = fixed_edge_tour(string_problem)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/p_gnn001/code/tsp/tsp/atsp_solve.py", line 26, in fixed_edge_tour
+    solution = lkh.solve(lkh_path, problem=problem)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/lkh/__init__.py", line 49, in solve
+    raise Exception(e.output.decode())
+Exception: PARAMETER_FILE = /tmp/slurm-6425228/tmp9umjep6t
+Reading PROBLEM_FILE: "/tmp/slurm-6425228/tmpviwu7q05" ... done
+ASCENT_CANDIDATES = 50
+BACKBONE_TRIALS = 0
+BACKTRACKING = NO
+# BWTSP =
+# CANDIDATE_FILE =
+CANDIDATE_SET_TYPE = ALPHA
+# DISTANCE =
+# DEPOT =
+# EDGE_FILE =
+EXCESS = 0.0104167
+EXTERNAL_SALESMEN = 0
+EXTRA_CANDIDATES = 0 
+EXTRA_CANDIDATE_SET_TYPE = QUADRANT
+GAIN23 = NO
+GAIN_CRITERION = YES
+INITIAL_PERIOD = 100
+INITIAL_STEP_SIZE = 1
+INITIAL_TOUR_ALGORITHM = WALK
+# INITIAL_TOUR_FILE = 
+INITIAL_TOUR_FRACTION = 1.000
+# INPUT_TOUR_FILE = 
+K = 0
+KICK_TYPE = 4
+KICKS = 1
+# MAX_BREADTH =
+MAKESPAN = NO
+MAX_CANDIDATES = 5 
+MAX_SWAPS = 0
+MAX_TRIALS = 192
+# MERGE_TOUR_FILE =
+MOVE_TYPE = 5 SPECIAL
+# MTSP_MIN_SIZE =
+# MTSP_MAX_SIZE =
+# MTSP_OBJECTIVE =
+# MTSP_SOLUTION_FILE = 
+# NONSEQUENTIAL_MOVE_TYPE = 5
+# OPTIMUM =
+# OUTPUT_TOUR_FILE = 
+PATCHING_A = 1 
+PATCHING_C = 0 
+# PI_FILE = 
+POPMUSIC_INITIAL_TOUR = NO
+POPMUSIC_MAX_NEIGHBORS = 5
+POPMUSIC_SAMPLE_SIZE = 10
+POPMUSIC_SOLUTIONS = 50
+POPMUSIC_TRIALS = 1
+POPULATION_SIZE = 10
+PRECISION = 100
+PROBLEM_FILE = /tmp/slurm-6425228/tmpviwu7q05
+RECOMBINATION = IPT
+RESTRICTED_SEARCH = YES
+RUNS = 10
+SALESMEN = 1
+SCALE = 1
+SEED = 1
+STOP_AT_OPTIMUM = YES
+SUBGRADIENT = YES
+# SUBPROBLEM_SIZE =
+# SUBPROBLEM_TOUR_FILE = 
+SUBSEQUENT_MOVE_TYPE = 5 SPECIAL
+SUBSEQUENT_PATCHING = YES
+# TIME_LIMIT =
+# TOTAL_TIME_LIMIT =
+TOUR_FILE = /tmp/slurm-6425228/tmpixxzmpbr
+TRACE_LEVEL = 1
+VEHICLES = 1
+
+Lower bound = -996225.7, Ascent time = 0.03 sec.
+Cand.min = 5, Cand.avg = 5.0, Cand.max = 5
+Edges.fixed = 96 [Cost = 0]
+Preprocessing time = 0.03 sec.
+* 1: Cost = -996063, Time = 0.00 sec.
+* 5: Cost = -996149, Time = 0.00 sec.
+LKH: LinKernighan.c:139: GainType LinKernighan(): Assertion `Gain % Precision == 0' failed.
+

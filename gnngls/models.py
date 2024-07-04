@@ -58,7 +58,6 @@ class RGCN4(nn.Module):
             inputs = self.embed_layer(inputs)
             h1 = {graph.ntypes[0]: inputs}
             for gnn_layer in self.gnn_layers:
-                
                 h2 = gnn_layer(graph, h1)
                 h2 = {k: F.leaky_relu(v).flatten(1) for k, v in h2.items()}
                 h2[graph.ntypes[0]] += h1[graph.ntypes[0]]
