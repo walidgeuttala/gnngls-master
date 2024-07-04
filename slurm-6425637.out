@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/project/p_gnn001/code/tsp/tsp/generate_instances.py", line 82, in <module>
+    for G in pool.imap_unordered(prepare_instance, instance_gen):
+  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/multiprocessing/pool.py", line 873, in next
+    raise value
+ValueError: invalid literal for int() with base 10: 'tour'

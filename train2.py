@@ -130,29 +130,6 @@ def tsp_to_atsp_instance(G1):
     
     return G2
 
-def parse_args():
-    parser = argparse.ArgumentParser(description='Train model')
-    parser.add_argument('data_dir', type=pathlib.Path, help='Where to load dataset')
-    parser.add_argument('tb_dir', type=pathlib.Path, help='Where to log Tensorboard data')
-    parser.add_argument('--embed_dim', type=int, default=128, help='Maximum hidden feature dimension')
-    parser.add_argument('--n_layers', type=int, default=3, help='Number of message passing steps')
-    parser.add_argument('--n_heads', type=int, default=8, help='Number of attention heads for GAT')
-    parser.add_argument('--lr_init', type=float, default=1e-3, help='Initial learning rate')
-    parser.add_argument('--lr_decay', type=float, default=0.95, help='Learning rate decay')
-    parser.add_argument('--min_delta', type=float, default=1e-4, help='Early stopping min delta')
-    parser.add_argument('--patience', type=int, default=5, help='Early stopping patience')
-    parser.add_argument('--batch_size', type=int, default=15, help='Batch size')
-    parser.add_argument('--n_epochs', type=int, default=10, help='Number of epochs')
-    parser.add_argument('--checkpoint_freq', type=int, default=1, help='Checkpoint frequency')
-    parser.add_argument('--target', type=str, default='regret', choices=['regret', 'in_solution'])
-    parser.add_argument('--kj', type=str, default='cat', choices=['cat', 'max'])
-    parser.add_argument('--use_gpu', action='store_true')
-    parser.add_argument('--tsp', action='store_true')
-    
-    args = parser.parse_args()
-
-    return args
-
 
 
 def run(args):
@@ -307,10 +284,10 @@ def main():
     search_space = {
         "embed_dim": [128],
         "embd_dim2": [128*2],
-        "n_layers": [2],
+        "n_layers": [3],
         "lr_init": [1e-3],
-        "n_heads": [16],
-        "kj": ['cat'],
+        "n_heads": [32*2],
+        "kj": ['sum'],
     }
 
     args = parse_args()

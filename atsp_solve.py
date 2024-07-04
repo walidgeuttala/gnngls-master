@@ -98,9 +98,9 @@ for i in range(number_instances):
     string_problem = create_tsplib95_string(adjacency_matrix)
     tour = fixed_edge_tour(string_problem)
     cost = compute_tour_cost(tour, adjacency_matrix)
-    
+    print(cost)
     all_instances_lower_triangle_tour_cost += gnngls.convert_adj_string(adjacency_matrix) + ',' + " ".join(map(str, tour)) + ',' + str(cost) + '\n'
-    break
+    
 # Ensure output directory exists
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)

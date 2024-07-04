@@ -17,7 +17,7 @@ import linecache
 
 def prepare_instance(G):
     datasets.set_features(G)
-    datasets.set_labels(G)
+    #datasets.set_labels(G)
     return G
 
 def get_solved_instances(n_nodes, n_instances):
@@ -44,25 +44,29 @@ def get_solved_instances2(n_nodes, n_instances, all_instances):
     # Open the file in read mode
    
     for i in range(n_instances):
-        line = linecache.getline(all_instances, i+2001).strip()
-        G = nx.Graph()
-        adj, opt_solution, cost = line.split(',')
-        adj = adj.split(' ')
-
-        G.add_nodes_from(range(n_nodes))
-        opt_solution = [int(x) for x in opt_solution.split()]
+        line = linecache.getline(all_instances, i+2).strip()
+        print(len(line))
+        # break
+        # G = nx.Graph()
+        # adj, opt_solution, cost = line.split(',')
+        # adj = adj.split(' ')
+        # print(len(adj))
+        # print(len(opt_solution))
+        # n_nodes = len(opt_solution)
+        # G.add_nodes_from(range(n_nodes))
+        # opt_solution = [int(x) for x in opt_solution.split()]
        
-        # Add the edges for the DiGraph and be sure that does not have self loops in the node
-        for j in range(n_nodes):
-            for k in range(n_nodes):
-                w = float(adj[j*n_nodes+k])
-                if j != k:
-                    G.add_edge(j, k, weight=w)
+        # # Add the edges for the DiGraph and be sure that does not have self loops in the node
+        # for j in range(n_nodes):
+        #     for k in range(n_nodes):
+        #         w = float(adj[j*n_nodes+k])
+        #         if j != k:
+        #             G.add_edge(j, k, weight=w)
             
-        in_solution = gnngls.tour_to_edge_attribute(G, opt_solution)
-        nx.set_edge_attributes(G, in_solution, 'in_solution')
+        # in_solution = gnngls.tour_to_edge_attribute(G, opt_solution)
+        # nx.set_edge_attributes(G, in_solution, 'in_solution')
 
-        yield G
+        # yield G
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate a dataset.')
@@ -72,16 +76,19 @@ if __name__ == '__main__':
     parser.add_argument('output_dir', type=pathlib.Path)
     args = parser.parse_args()
 
-    if args.output_dir.exists():
-        raise Exception(f'Output directory {args.output_dir} exists.')
-    else:
-        args.output_dir.mkdir()
+    
+    args.output_dir.mkdir(parents=True, exist_ok=True)
 
     pool = mp.Pool(processes=None)
     instance_gen = get_solved_instances2(args.n_nodes, args.n_samples, args.input_file)
-    for G in pool.imap_unordered(prepare_instance, instance_gen):
-        nx.write_gpickle(G, args.output_dir / f'{uuid.uuid4().hex}.pkl')
-    pool.close()
-    pool.join()
-
+    # Process and save instances
+    try:
+        for G in pool.imap_unordered(prepare_instance, instance_gen):
+            output_file = args.output_dir / f'{uuid.uuid4().hex}.pkl'
+            nx.write_gpickle(G, output_file)
+    except Exception as e:
+        print(f"Error occurred during processing: {e}")
+    finally:
+        pool.close()
+        pool.join()
 
