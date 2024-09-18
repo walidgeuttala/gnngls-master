@@ -13,8 +13,8 @@
 
 # Your job commands here
 #python tsp_solving.py
-python generate_instances.py 19 128 ../atsplib95_19_instances_public_data/all_instances_adj_tour_cost.txt ../tsp_lib_test_with_regret
-python preprocess_dataset.py ../tsp_lib_test_with_regret
+#python generate_instances.py 19 128 ../atsplib95_19_instances_public_data/all_instances_adj_tour_cost.txt ../tsp_lib_test_with_regret2
+python preprocess_dataset.py ../tsp_lib_test_with_regret2
 #python train.py ../generated ../model_result --use_gpu
 #python test_me.py
 #python preprocess_dataset2.py ../generatedn2000

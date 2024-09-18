@@ -16,6 +16,6 @@
 # python tsp_solving.py
 #python generate_instances.py 2000 128 ../tsplib95_10000_instances_64_node/tsp_all_instances_adj_tour_cost.txt ../generatedn2000
 #python preprocess_dataset.py ../generatedn2000
-#python train2.py ../atsp_n5900 ../model_result_try --use_gpu
-python test.py ../tsp_lib_test/test.txt ../model_result_try/Jul04_06-07-36_f96a16738bb244bdbc32ac575f513e73/checkpoint_best_val.pt ../runs_lib_19_weight weight ../out_lib_19_weight
+python train2.py ../atsp_n5900 ../model_result_try --use_gpu
+#python test.py ../tsp_lib_test_with_regret2/test.txt ../model_result_try/Jul13_16-09-51_6937d04a2f2f4c90b92ad923ed0d8304/checkpoint_best_val.pt ../runs_lib_19_regret2 regret_pred ../out_lib_19_regret3
 #python test_me.py

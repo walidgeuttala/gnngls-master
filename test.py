@@ -98,7 +98,7 @@ if __name__ == '__main__':
             1,
             test_set.etypes,
             params['n_layers'],
-            16
+            params['n_heads']
         ).to(device)
 
         checkpoint = torch.load(args.model_path, map_location=device)
@@ -120,8 +120,8 @@ if __name__ == '__main__':
     corr_all = 0.
     for instance in pbar:
         G = nx.read_gpickle(test_set.root_dir / instance)
-
-        opt_cost = gnngls.optimal_cost(G, weight='weight')
+        
+        opt_cost = gnngls.optimal_cost(G, weight='in_solution')
 
         t = time.time()
         search_progress.append({
@@ -161,8 +161,8 @@ if __name__ == '__main__':
         print(f'best tour {best_tour}')
         search_progress.append(row)
         edge_weight, _ = nx.attr_matrix(G, 'weight')
-        #regret, _ = nx.attr_matrix(G, 'regret')
-        #regret_pred, _ = nx.attr_matrix(G, 'regret_pred')
+        regret, _ = nx.attr_matrix(G, 'regret')
+        regret_pred, _ = nx.attr_matrix(G, 'regret_pred')
         #print(y_pred.shape)
         with open(args.output_path / f"instance{cnt}.txt", "w") as f:
             # Save array1
@@ -170,21 +170,20 @@ if __name__ == '__main__':
             np.savetxt(f, edge_weight, fmt="%.8f", delimiter=" ")
             f.write("\n")
 
-            # # Save array2
-            # f.write("regret:\n")
-            # np.savetxt(f, add_diag(H.ndata['regret'].cpu()).numpy(), fmt="%.8f", delimiter=" ")
-            # f.write("\n")
+            # Save array2
+            f.write("regret:\n")
+            np.savetxt(f, add_diag(num_nodes, H.ndata['regret'].cpu()).numpy(), fmt="%.8f", delimiter=" ")
+            f.write("\n")
 
             # Save array3
-            # f.write("regret_pred:\n")
-            # np.savetxt(f, add_diag(num_nodes, y_pred.cpu()).numpy(), fmt="%.8f", delimiter=" ")
-            # f.write("\n")
+            f.write("regret_pred:\n")
+            np.savetxt(f, add_diag(num_nodes, y_pred.cpu()).numpy(), fmt="%.8f", delimiter=" ")
+            f.write("\n")
 
             f.write(f"opt_cost: {opt_cost}\n")
             f.write(f"num_iterations: {cnt_ans}\n")
             f.write(f"init_cost: {init_cost}\n")
             f.write(f"best_cost: {best_cost}\n")
-            f.write(f"best_cost2: {best_cost2}\n")
             
         
         cnt += 1
@@ -193,18 +192,16 @@ if __name__ == '__main__':
         
         init_gaps.append(init_gap)
         final_gaps.append(final_gap)
-        #avg_corr_normal.append(correlation_matrix(y_pred.cpu(), H.ndata['regret'].cpu()))
-        #avg_corr_cosine.append(cosine_similarity(y_pred.cpu().view(-1), H.ndata['regret'].cpu().view(-1)))
+        avg_corr_normal.append(correlation_matrix(y_pred.cpu(), H.ndata['regret'].cpu()))
+        avg_corr_cosine.append(cosine_similarity(y_pred.cpu().view(-1), H.ndata['regret'].cpu().view(-1)))
         avg_cnt_ans.append(cnt_ans)
 
         pbar.set_postfix({ 
                 'Avg Gap init:': '{:.4f}'.format(np.mean(init_gaps)),
                 'Avg Gap best:': '{:.4f}'.format(np.mean(final_gaps)),
-                'best_cost2:': '{:.4f}'.format(best_cost2),
-                'best_cost:': '{:.4f}'.format(best_cost),
-                'opt_cost:': '{:.4f}'.format(opt_cost),
-                #'Avg corr normal ': '{:.4f}'.format(np.mean(avg_corr_normal)*100),
-                #'Avg cosine normal ': '{:.4f}'.format(np.mean(avg_corr_cosine)*100),
+                
+                'Avg corr normal ': '{:.4f}'.format(np.mean(avg_corr_normal)*100),
+                'Avg cosine normal ': '{:.4f}'.format(np.mean(avg_corr_cosine)*100),
                 'Avg counts ': '{:.4f}'.format(np.mean(avg_cnt_ans)),
             })
 

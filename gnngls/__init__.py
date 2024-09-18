@@ -135,7 +135,7 @@ def get_adj_matrix_string(G):
     n = adj_matrix.shape[0]
     ans = f'''NAME: TSP
     COMMENT: 64-city problem
-    TYPE: TSP
+    TYPE: ATSP
     DIMENSION: {n}
     EDGE_WEIGHT_TYPE: EXPLICIT
     EDGE_WEIGHT_FORMAT: FULL_MATRIX

@@ -64,7 +64,9 @@ def get_solved_instances2(n_nodes, n_instances, all_instances):
             
         in_solution = gnngls.tour_to_edge_attribute(G, opt_solution)
         nx.set_edge_attributes(G, in_solution, 'in_solution')
-
+        opt_cost = gnngls.optimal_cost(G, weight='weight')
+        if opt_cost != cost:
+            print('does not match opt_cost:{opt_cost} cost:{cost}')
         yield G
 
 if __name__ == '__main__':

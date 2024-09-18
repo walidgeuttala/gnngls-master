@@ -19,11 +19,11 @@ if __name__ == '__main__':
     parser.add_argument('--n_val', type=int, default=450)
     args = parser.parse_args()
 
-    if (args.dir / 'scalers.pkl').is_file():
-        raise Exception('scalers.pkl already exists.')
+    # if (args.dir / 'scalers.pkl').is_file():
+    #     raise Exception('scalers.pkl already exists.')
 
     # train test split
-    instances = list(args.dir.glob('*.pkl'))
+    instances = list(args.dir.glob('instance*.pkl'))
     random.shuffle(instances)
 
     train_set = instances[:args.n_train]
@@ -37,7 +37,8 @@ if __name__ == '__main__':
             print(f'{file_name} contains {len(data_set)} instances.')
 
     scalers = {
-        'features': MinMaxScaler()
+        'features': MinMaxScaler(),
+        'regret': MinMaxScaler()
     }
 
     for instance_path in tqdm.tqdm(train_set, total=len(train_set)):
@@ -46,4 +47,4 @@ if __name__ == '__main__':
         for k in scalers:
             scalers[k].partial_fit(np.vstack([G.edges[e][k] for e in G.edges]))
 
-    pickle.dump(scalers, open(args.dir / 'scalers.pkl', 'wb'))
+    #pickle.dump(scalers, open(args.dir / 'scalers.pkl', 'wb'))

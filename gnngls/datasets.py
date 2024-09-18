@@ -191,17 +191,22 @@ class TSPDataset(torch.utils.data.Dataset):
         self.etypes = self.G.etypes
 
         features = []
+        regret = []
         in_solution = []
         for e, idx in self.edge_id.items():
             features.append(G.edges[e]['weight'])
+            regret.append(G.edges[e]['regret'])
             in_solution.append(G.edges[e]['in_solution'])
 
         features = np.vstack(features)
-        features_transformed = self.scalers['weight'].transform(features)        
+        features_transformed = self.scalers['weight'].transform(features)
+        regret = np.vstack(regret)
+        regret_transformed = self.scalers['regret'].transform(regret)        
         in_solution = np.vstack(in_solution)
         
         H = copy.deepcopy(self.G)
         H.ndata['weight'] = torch.tensor(features_transformed, dtype=torch.float32)
+        H.ndata['regret'] = torch.tensor(regret_transformed, dtype=torch.float32)
         H.ndata['in_solution'] = torch.tensor(in_solution, dtype=torch.float32)
         H.ndata['e'] = self.G.ndata['e'].clone()
 

@@ -227,6 +227,7 @@ def run(args):
                 G.edges[e]['regret_pred'] = np.maximum(regret_pred_i.item(), 0)
             G = tsp_to_atsp_instance(G)
             opt_cost = gnngls.optimal_cost(G, weight='weight')
+            print(opt_cost)
             init_tour = algorithms.nearest_neighbor(G, 0, weight='regret_pred')
             init_cost = gnngls.tour_cost(G, init_tour)
             average_corr1 += correlation_matrix(y_pred.cpu(),H.ndata['regret'].cpu())
