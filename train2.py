@@ -166,23 +166,23 @@ def run(args):
 
     feat_dim = 1
     set_random_seed(1234)
-    # model = models.EdgePropertyPredictionModel(
-    #     feat_dim,
-    #     args.embed_dim,
-    #     1,
-    #     args.n_layers,
-    #     n_heads=args.n_heads,
-    #     embed_dim2 = args.embed_dim2,
-    #     kj = args.kj
-    # ).to(device)
-    model = models.RGCN4(
+    model = models.EdgePropertyPredictionModel(
         feat_dim,
         args.embed_dim,
         1,
-        train_set.etypes,
         args.n_layers,
-        args.n_heads
+        n_heads=args.n_heads,
+        embed_dim2 = args.embed_dim2,
+        kj = args.kj
     ).to(device)
+    # model = models.RGCN4(
+    #     feat_dim,
+    #     args.embed_dim,
+    #     1,
+    #     train_set.etypes,
+    #     args.n_layers,
+    #     args.n_heads
+    # ).to(device)
 
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr_init)
     lr_scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, args.lr_decay)

@@ -1,7 +1,0 @@
-Traceback (most recent call last):
-  File "/project/p_gnn001/code/tsp/tsp/train3.py", line 21, in <module>
-    from gnngls import models2, datasets, algorithms
-  File "/project/p_gnn001/code/tsp/tsp/gnngls/models2.py", line 48
-    ,
-    ^
-SyntaxError: invalid syntax

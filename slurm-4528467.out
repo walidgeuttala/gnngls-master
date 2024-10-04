@@ -1,12 +1,0 @@
-device = cuda
-  0%|          | 0/10 [00:00<?, ?it/s]  0%|          | 0/10 [01:58<?, ?it/s]
-Traceback (most recent call last):
-  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 333, in <module>
-    main()
-  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 326, in main
-    val_loss = run(args)
-               ^^^^^^^^^
-  File "/project/p_gnn001/code/tsp/tsp/train2.py", line 238, in run
-    if args.tsp:
-       ^^^^^^^^
-AttributeError: 'Namespace' object has no attribute 'tsp'

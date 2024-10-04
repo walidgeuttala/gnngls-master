@@ -1,9 +1,0 @@
-device = cuda
-  0%|          | 0/10 [00:00<?, ?it/s]  0%|          | 0/10 [01:36<?, ?it/s, Train Loss=0.0099, Validation Loss=0.0071, correlation : =0.3392, cosin correlation : =0.9371, gap : =195.0316] 10%|█         | 1/10 [01:36<14:26, 96.23s/it, Train Loss=0.0099, Validation Loss=0.0071, correlation : =0.3392, cosin correlation : =0.9371, gap : =195.0316] 10%|█         | 1/10 [03:12<14:26, 96.23s/it, Train Loss=0.0069, Validation Loss=0.0067, correlation : =0.4339, cosin correlation : =0.9422, gap : =201.3627] 20%|██        | 2/10 [03:12<12:47, 95.99s/it, Train Loss=0.0069, Validation Loss=0.0067, correlation : =0.4339, cosin correlation : =0.9422, gap : =201.3627]slurmstepd: error: *** JOB 4548799 ON x1001c2s2b0n1 CANCELLED AT 2024-04-25T05:35:40 ***
-Exception in thread Thread-9 (_pin_memory_loop):
-Traceback (most recent call last):
-  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
-    self.run()
-  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/threading.py", line 1010, in run
-    self._target(*self._args, **self._kwargs)
-  File "/home/p_gnngw/miniconda3/envs/cuda118/lib/python3.12/site-packages/torch/utils/data/_utils/pin_memory.py", line 53, in _pin_memory_loop

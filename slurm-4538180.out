@@ -1,8 +1,0 @@
-device = cuda
-  0%|          | 0/20 [00:00<?, ?it/s]  0%|          | 0/20 [00:00<?, ?it/s]
-5
-Traceback (most recent call last):
-  File "/project/p_gnn001/code/tsp/tsp/test.py", line 156, in <module>
-    best_tour, best_cost, search_progress_i, cnt_ans = algorithms.guided_local_search(G, init_tour, init_cost,
-                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-TypeError: guided_local_search() got an unexpected keyword argument 'value'

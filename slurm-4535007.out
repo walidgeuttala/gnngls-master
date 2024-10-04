@@ -1,8 +1,0 @@
-device = cuda
-['ss', 'st', 'ts', 'tt', 'pp']
-5
-Traceback (most recent call last):
-  File "/project/p_gnn001/code/tsp/tsp/test.py", line 129, in <module>
-    regret_pred = test_set.scalers['regret']['node1'].inverse_transform(y_pred.cpu().numpy())
-                  ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
-TypeError: 'MinMaxScaler' object is not subscriptable
