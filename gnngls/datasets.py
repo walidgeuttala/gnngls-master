@@ -37,7 +37,6 @@ def set_labels(G):
         G.edges[e]['regret'] = regret
 
 def set_labels2(G):
-    optimal_cost = get_optimal_cost(G)
     for e in G.edges:
         regret = 0.
         G.edges[e]['regret'] = regret
@@ -130,7 +129,7 @@ class TSPDataset(torch.utils.data.Dataset):
             instances_file = pathlib.Path(instances_file)
         self.root_dir = instances_file.parent
 
-        self.instances = sorted([line.strip() for line in open(instances_file)])
+        self.instances = [line.strip() for line in open(instances_file)]
 
         if scalers_file is None:
             scalers_file = self.root_dir / 'scalers.pkl'
@@ -146,7 +145,7 @@ class TSPDataset(torch.utils.data.Dataset):
         G = nx.read_gpickle(self.root_dir / self.instances[0])
         self.G, self.edge_id = directed_string_graph(G)
         # tranfer to hmogines graph
-        # self.G = dgl.to_homogeneous(self.G, ndata=['e'])
+        self.G = dgl.to_homogeneous(self.G, ndata=['e'])
         self.etypes = self.G.etypes
 
     def __len__(self):
@@ -161,6 +160,7 @@ class TSPDataset(torch.utils.data.Dataset):
         return H
 
     def get_scaled_features(self, G):
+        
         features = []
         regret = []
         in_solution = []
@@ -180,6 +180,35 @@ class TSPDataset(torch.utils.data.Dataset):
         H.ndata['regret'] = torch.tensor(regret_transformed, dtype=torch.float32)
         H.ndata['in_solution'] = torch.tensor(in_solution, dtype=torch.float32)
         H.ndata['e'] = self.G.ndata['e'].clone()
+        return H
+    
+    def get_test_scaled_features_not_samesize_graphs(self, G):
+
+        self.G, self.edge_id = directed_string_graph(G)
+        # tranfer to hmogines graph
+        # self.G = dgl.to_homogeneous(self.G, ndata=['e'])
+        self.etypes = self.G.etypes
+
+        features = []
+        regret = []
+        in_solution = []
+        for e, idx in self.edge_id.items():
+            features.append(G.edges[e]['weight'])
+            regret.append(G.edges[e]['regret'])
+            in_solution.append(G.edges[e]['in_solution'])
+
+        features = np.vstack(features)
+        features_transformed = self.scalers['weight'].transform(features)
+        regret = np.vstack(regret)
+        regret_transformed = self.scalers['regret'].transform(regret)        
+        in_solution = np.vstack(in_solution)
+        
+        H = copy.deepcopy(self.G)
+        H.ndata['weight'] = torch.tensor(features_transformed, dtype=torch.float32)
+        H.ndata['regret'] = torch.tensor(regret_transformed, dtype=torch.float32)
+        H.ndata['in_solution'] = torch.tensor(in_solution, dtype=torch.float32)
+        H.ndata['e'] = self.G.ndata['e'].clone()
+
         return H
 
 
